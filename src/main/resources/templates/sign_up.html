@@ -10,10 +10,45 @@
 			<h1>Sign up Form </h1>
 			
 		    <form action="#" th:action="@{/sign_up}" th:object="${user}" method="post">
+		    	<table>
+		    	<tr>
+		    		<td>
+		    		<label for="firstName">First Name:</label>
+		    		<input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Enter your first Name" /></td>
+		    		<td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</td>	
+		    	</tr>
+		    	
+		    	<tr>
+		    		
+		    		<td>
+		    		<label for="lastName">Last Name:</label>
+		    		<input type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="Enter your last Name"/></td>
+		    		<td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName	}">Error</td>	
+		    	</tr>
+		    	
+		    	<tr>
+		    		<td>
+		    		<label for="email">E-Mail:</label> 
+		    		<input type="email" th:field="*{email}" class="form-control" id="email" placeholder="email@you.com"/></td>
+		    		<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</td>
+		    			
+		    	</tr>
+		    	
+		    	<tr>
+		    		<td>
+		    		<label for="password">Password:</label>
+					<input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Password"/></td>
+		    		<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</td>	
+		    	</tr>
+		  	</table>
+		    	
+		    	<p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
+		    <!--  
 		    <div class="form-group">
 		    	<label for="firstName">First Name:</label>
 		    	<input type="text" class="form-control" id="firstName" placeholder="Enter your first Name" th:field="*{firstName}" />
 		    </div>
+		    
 		    <div class="form-group">
 		    	<label for="lastName">Last Name:</label>
 		    	<input type="text" class="form-control" id="lastName" placeholder="Enter your last Name" th:field="*{lastName}" />
@@ -29,6 +64,10 @@
 		    </div>
 
 		        <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
+		    	-->
+		    	
+		    		
+
 		    </form>
 		</div>	     
 	</body>
