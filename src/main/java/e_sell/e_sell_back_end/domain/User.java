@@ -1,4 +1,4 @@
-package e_sell.e_sell_back_end.web;
+package e_sell.e_sell_back_end.domain;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
