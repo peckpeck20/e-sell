@@ -6,10 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import e_sell.e_sell_back_end.web.Item;
 import e_sell.e_sell_back_end.web.User;
 
 @Controller 
@@ -21,7 +20,7 @@ public class AppController {
 		return "new_user";
 	}
 */
-	//create empty User object and add to model
+	//1.create empty User object and add to model
 	@GetMapping("/sign_up")
 	public String signUpForm(Model model){
 		model.addAttribute("user", new User());
@@ -35,16 +34,35 @@ public class AppController {
 	}
 	*/
 	
-
+////2.post filled form from user to the model object created in step 1 once validated
 	@PostMapping("/sign_up")
 	public String signUpSubmit(@Valid User user,BindingResult bindingResult,Model model){
 		if (bindingResult.hasErrors()){
 			//if the form has errors return Error
-			return "error";
+			return "sign_up";
 		}
 		//if its correct proceed to add user to model
 		model.addAttribute("user",user);
-		return "correct";
+		return "redirect:/add_item";
+	}
+	
+	//1.create empty Item object and add to model
+	@GetMapping("/add_item")
+	public String itemForm(Model model){
+		model.addAttribute("item", new Item());
+		return "add_item";
+	}
+	
+////2.post filled form from user to the model object created in step 1 once validated
+	@PostMapping("/add_item")
+	public String itemFormSubmit(@Valid Item item,BindingResult bindingResult,Model model){
+		if (bindingResult.hasErrors()){
+			//if the form has errors return Error
+			return "add_item";
+		}
+		//if its correct proceed to add user to model
+		model.addAttribute("item",item);
+		return "redirect:/correct";
 	}
 	
 
