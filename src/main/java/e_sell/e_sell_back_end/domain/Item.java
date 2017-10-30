@@ -1,13 +1,19 @@
 package e_sell.e_sell_back_end.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 //import java.io.Serializable;
 
+@Entity
 public class Item {
-	//implement Serializable
-	//implements Serializable
-	//private static final long serialVersionUID = 1L;
+	//generated ID column 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@NotNull
 	private String title;
 	@NotNull
@@ -16,9 +22,25 @@ public class Item {
 	private String condition;
 	@NotNull
 	private String zipcode;
-	
 	private double price;
 	
+	//JPA constructor should be PROTECTED
+	public Item(){}
+	
+	
+	//constructor
+	public Item(String title, String description, String condition, String zipcode, double price) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.condition = condition;
+		this.zipcode = zipcode;
+		this.price = price;
+	}
+
+
+
+	//getter n setter
 	public String gettitle() {
 		return title;
 	}
@@ -53,12 +75,10 @@ public class Item {
 	}
 	@Override
 	public String toString() {
-		return "Item [title=" + title + ", description=" + description + ", condition=" + condition + ", zipcode="
-				+ zipcode + ", price=" + price + ", gettitle()=" + gettitle() + ", getDescription()=" + getDescription()
-				+ ", getCondition()=" + getCondition() + ", getzipcode()=" + getzipcode() + ", getPrice()=" + getPrice()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "Item [id=" + id + ", title=" + title + ", description=" + description + ", condition=" + condition
+				+ ", zipcode=" + zipcode + ", price=" + price + "]";
 	}
+
 	
 	
 

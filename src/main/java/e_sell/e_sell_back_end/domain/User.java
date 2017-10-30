@@ -1,9 +1,18 @@
 package e_sell.e_sell_back_end.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class User {
+	//generated ID column 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@NotNull
 	@Size(min=2,max=30)
 	private String firstName;
@@ -17,6 +26,20 @@ public class User {
 	@Size(min=7)
 	private String password;
 	
+
+	//constructor
+	public User(String firstName, String lastName, String email, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+	}
+	//JPA constructor should be PROTECTED
+	public User(){}
+
+
+	//setter & getter
 	public String getFirstName() {
 		return firstName;
 	}
@@ -43,9 +66,10 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password
-				+ "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + "]";
 	}
+
 	
 	
 }
