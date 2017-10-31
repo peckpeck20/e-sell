@@ -2,6 +2,7 @@ package e_sell.e_sell_back_end.web;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,10 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import e_sell.e_sell_back_end.domain.Item;
+import e_sell.e_sell_back_end.domain.ItemRepository;
 import e_sell.e_sell_back_end.domain.User;
+import e_sell.e_sell_back_end.domain.UserRepository;
+
 
 @Controller 
 public class AppController {
+	//allows us to use the repositories methods
+	@Autowired
+	private UserRepository urepository;
+	
+	@Autowired
+	private ItemRepository irepository;
 
 
 	@RequestMapping("/correct")
@@ -43,6 +53,7 @@ public class AppController {
 			return "sign_up";
 		}
 		//if its correct proceed to add user to model
+		//urepository.save(User, user);
 		model.addAttribute("user",user);
 		return "redirect:/add_item";
 	}
@@ -54,7 +65,7 @@ public class AppController {
 		return "add_item";
 	}
 	
-////2.post filled form from user to the model object created in step 1 once validated
+	//2.post filled form from user to the model object created in step 1 once validated
 	@PostMapping("/add_item")
 	public String itemFormSubmit(@Valid Item item,BindingResult bindingResult,Model model){
 		if (bindingResult.hasErrors()){
@@ -65,6 +76,13 @@ public class AppController {
 		model.addAttribute("item",item);
 		return "redirect:/correct";
 	}
+	
+	//list all user
+    @RequestMapping(value ="/userlist")
+    public String userList(Model model) {	
+        model.addAttribute("users", urepository.findAll());
+        return "userlist";
+    }
 	
 	
 	
