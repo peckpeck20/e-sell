@@ -11,6 +11,7 @@
 	<table class="table table-striped">
 	  <tr>
 	    <th>Title </th>
+	    <th>Category </th>
 	    <th>Description </th> 
 	    <th>Condition </th>
 	    <th>Zipcode </th>
@@ -20,6 +21,7 @@
 	  </tr>
 	  <tr th:each = "item: ${items}">
 	    <td th:text="${item.title}"></td>
+	    <td th:text="${item.category.type}"></td>
 	    <td th:text="${item.description}"></td>
 	    <td th:text="${item.condition}"></td>
 	    <td th:text="${item.zipcode}"></td>

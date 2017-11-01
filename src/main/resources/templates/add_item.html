@@ -18,11 +18,29 @@
 		    	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
 		    </div>
 		    
+		    
+
+			<div class="form-group">
+				<label for="category">Category :</label>
+				 <select id="category" th:field="*{category}" class="form-control">
+	       			<option th:each="category : ${categorys}" 
+	       			th:value="${category.id}" 
+	       			th:text="${category.type}"></option>
+	    		</select>		
+			</div>
+			
+			 
+		    
 		    <div class="form-group">
-		    <!-- Change to textbox -->
+		    <!-- check validation- not working -->
 		    	<label for="description">Description:</label>
-		    	<input type="text" class="form-control" id="description" placeholder="Enter your last Name" th:field="*{description}" />
+		    	<textarea name="description" rows="5" cols="10" class="form-control" id="description" placeholder="Enter the description here" th:field="*{description}" >
+		    	
+		    	
+		    	</textarea>
+		    	  <!-- <input type="text" class="form-control" id="description" placeholder="Enter your last Name" th:field="*{description}" />  -->
 		    	<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
+		     
 		    </div>
 		    
 		    <div class="form-group">

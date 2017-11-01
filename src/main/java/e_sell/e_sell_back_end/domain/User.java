@@ -1,9 +1,13 @@
 package e_sell.e_sell_back_end.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,7 +30,19 @@ public class User {
 	@Size(min=7)
 	private String password;
 	
-
+	/*
+	//user relationship one to * items
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+			private List<Item>items;
+//setters n getters for relationship
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+	
+	*/
 	//constructor
 	public User(String firstName, String lastName, String email, String password) {
 		super();

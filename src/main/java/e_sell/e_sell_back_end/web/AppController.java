@@ -72,6 +72,8 @@ public class AppController {
 	@GetMapping("/add_item")
 	public String itemForm(Model model){
 		model.addAttribute("item", new Item());
+		//add categories
+		model.addAttribute("categorys",crepository.findAll());
 		return "add_item";
 	}
 	

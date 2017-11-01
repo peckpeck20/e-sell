@@ -1,9 +1,14 @@
 package e_sell.e_sell_back_end.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Category {
@@ -14,6 +19,11 @@ public class Category {
 	private Long id;
 	private String type;
 	
+	// 1 Category can have * Items
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+	private List<Item> items;
+	
+
 	//constructor
 	public Category() {}
 	
@@ -36,6 +46,14 @@ public class Category {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	//getters n setters for relationship
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 
