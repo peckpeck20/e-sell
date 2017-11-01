@@ -7,8 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import e_sell.e_sell_back_end.domain.Category;
+import e_sell.e_sell_back_end.domain.CategoryRepository;
+import e_sell.e_sell_back_end.domain.Item;
 import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
+
 
 @SpringBootApplication
 public class ESellBackEndApplication {
@@ -20,12 +24,23 @@ public class ESellBackEndApplication {
 	}
 	//bean 
 		@Bean
-		public CommandLineRunner demo(UserRepository urepository) {
+		public CommandLineRunner demo(UserRepository urepository, CategoryRepository crepository) {
 			return (args) -> {
 				//saving users
 				urepository.save(new User("Jose","Zapata","jose@zapata.com","12345678"));
 				urepository.save(new User("Teddy","Bear","teddy@bear.com","12345678"));
 				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","12345678"));
+				
+				//create categories
+				crepository.save(new Category("Home"));
+				crepository.save(new Category("Electronics"));
+				crepository.save(new Category("Services"));
+				crepository.save(new Category("Vehicles"));
+				crepository.save(new Category("Clothes"));
+				
+
+
+				
 				
 				//show all users
 				log.info("SHOWING ALL USERS");
@@ -47,6 +62,13 @@ public class ESellBackEndApplication {
 					log.info(user.toString());
 				}
 				
+				//find Services category
+				log.info("SHOW SERVICES CATEGORY");
+				log.info("-------------------------------");
+				for (Category category : crepository.findByType("Services")){
+					log.info(category.toString());
+				}
+			
 			};
 	
 		}

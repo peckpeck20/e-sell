@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-	<title>Nice!</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Insert Header sources from template -->
+<head th:replace="template :: sources">
+	<title  id="pageTitle">nice!</title>
 </head>
 	<body>
-<h1>Excelente!</h1>     
-		    <!-- Insert footer template -->
-		    <div th:replace="template :: footer"></div>
+		<h1>Excelente!</h1>     
+		 <!-- Insert footer template -->
+		<div th:replace="template :: footer"></div>
 	</body>
 </html>

@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-	<title>User List</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	
+<!-- Insert Header sources from template -->
+<head th:replace="template :: sources">
+	<title  id="pageTitle">User list</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -30,6 +28,7 @@
 	</table>
 <!-- 	<div style="clear: both; display: block; height: 10px;"></div>
  <a  class="btn btn-success" th:href="@{/addbook}">Add a Book</a>-->
+ <a  class="btn btn-success" th:href="@{/signup}">Add a User</a>
 </div>
 	
 	

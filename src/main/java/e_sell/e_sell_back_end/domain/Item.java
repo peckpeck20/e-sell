@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-//import java.io.Serializable;
 
 @Entity
 public class Item {
@@ -15,18 +14,16 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@NotNull
-	private String title;
+	//should be PRIVATE --???
+	public String title;
 	@NotNull
 	private String description;
 	@NotNull
 	private String condition;
 	@NotNull
-	private String zipcode;
+	//should be PRIVATE --???
+	public String zipcode;
 	private double price;
-	
-	//JPA constructor should be PROTECTED
-	public Item(){}
-	
 	
 	//constructor
 	public Item(String title, String description, String condition, String zipcode, double price) {
@@ -37,6 +34,12 @@ public class Item {
 		this.zipcode = zipcode;
 		this.price = price;
 	}
+	
+	//JPA constructor should be PROTECTED
+	public Item(){}
+	
+	
+
 
 
 

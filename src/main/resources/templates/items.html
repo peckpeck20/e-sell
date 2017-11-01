@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert Header sources from template -->
+<head th:replace="template :: sources">
+	<title  id="pageTitle">Items listed</title>
+</head>
+
+<body>
+<div class="container-fluid">
+	<h1>All Items </h1>
+	<table class="table table-striped">
+	  <tr>
+	    <th>Title </th>
+	    <th>Description </th> 
+	    <th>Condition </th>
+	    <th>Zipcode </th>
+	    <th>Price </th>
+
+
+	  </tr>
+	  <tr th:each = "item: ${items}">
+	    <td th:text="${item.title}"></td>
+	    <td th:text="${item.description}"></td>
+	    <td th:text="${item.condition}"></td>
+	    <td th:text="${item.zipcode}"></td>
+	    <td th:text="${item.price}"></td>
+
+
+
+	  </tr>
+	</table>
+<!-- 	<div style="clear: both; display: block; height: 10px;"> </div>>-->
+ <a  class="btn btn-success" th:href="@{/add_item}">Add an item</a>
+</div>
+	
+	
+</body>
+</html>

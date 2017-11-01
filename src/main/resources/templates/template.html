@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!-- Header fragment -->
-	<head th:fragment="header">
+
+<html xmlns:th="http://www.thymeleaf.org" >
+<!-- sources fragment -->
+	<head th:fragment="sources">
+		<script type="text/javascript" th:src="@{/js/script.js}"></script>
 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-	<title></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<!-- #pageTitle references to the ID title posted in each page -->
+		<title th:include=":: #pageTitle"></title>
 	</head>
 	
 <!-- Footer fragment -->	
