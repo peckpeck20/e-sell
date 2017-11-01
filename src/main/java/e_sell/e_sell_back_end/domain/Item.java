@@ -14,19 +14,18 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@NotNull
-	//should be PRIVATE --???
-	public String title;
+	private String title;
 	@NotNull
 	private String description;
 	@NotNull
 	private String condition;
 	@NotNull
-	//should be PRIVATE --???
-	public String zipcode;
-	private double price;
+	private String zipcode;
+	@NotNull
+	private Double price;
 	
 	//constructor
-	public Item(String title, String description, String condition, String zipcode, double price) {
+	public Item(String title, String description, String condition, String zipcode, Double price) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -44,10 +43,10 @@ public class Item {
 
 
 	//getter n setter
-	public String gettitle() {
+	public String getTitle() {
 		return title;
 	}
-	public void settitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 	public String getDescription() {
@@ -62,16 +61,16 @@ public class Item {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	public String getzipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
-	public void setzipcode(String zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 		
 		
