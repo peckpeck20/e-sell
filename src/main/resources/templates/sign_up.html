@@ -2,11 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- Insert Header sources from template -->
 <head th:replace="template :: sources">
-	<title  id="pageTitle">Sign up e-sell</title>
+	<title  id="pageTitle">Welcome to e-Sell <b>Sign up</b></title>
 </head>
 
 	<body>
 		<div class="container-fluid">
+			<!-- insert navBar from template -->
+			<div th:replace="template :: navBar"></div>
 			<h1>Sign up Form </h1>
 			  
 		    <form action="#" th:action="@{/sign_up}" th:object="${user}" method="post">
@@ -65,11 +67,12 @@
 		    	<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
 		    </div>
 		    <div class="form-group">
+		    <!-- Include double password input and validate Feature -->
 		    	<label for="password">Password:</label>
-		    	<input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" />
+		    	<input type="password" name="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" />
 		    	<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
 		    </div>
-
+		    
 		        <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
 		    	
 		    	

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import e_sell.e_sell_back_end.domain.CategoryRepository;
 import e_sell.e_sell_back_end.domain.Item;
@@ -61,7 +63,7 @@ public class AppController {
 	}
 	
 	//list all user
-    @RequestMapping(value ="/userlist")
+    @RequestMapping(value ="userlist")
     public String userList(Model model) {
     	//add all users to Model
         model.addAttribute("users", urepository.findAll());
@@ -74,6 +76,8 @@ public class AppController {
 		model.addAttribute("item", new Item());
 		//add categories
 		model.addAttribute("categorys",crepository.findAll());
+		//add user
+		model.addAttribute("users",urepository.findAll());
 		return "add_item";
 	}
 	
@@ -96,7 +100,55 @@ public class AppController {
         model.addAttribute("items", irepository.findAll());
         return "items";
     }
-	
+    
+    //root redirect 
+    /*
+    @RequestMapping(value ="/*")
+    public String rootRedirect(Model model) {
+    	//add all items to Model
+        model.addAttribute("items", irepository.findAll());
+        return "redirect:/items";
+    }
+    */
+    
+    //delete a user
+    //in value we take the ID
+    @RequestMapping(value="/delete_user{id}",method = RequestMethod.GET)
+    //@PathVariable indicates that a method parameter should be bound to a URL template variable
+    public String deleteBook(@PathVariable("id")Long userId,Model model){
+		urepository.delete(userId);
+    	return "redirect:userlist";	
+    }
+    
+    //Edit user
+    @RequestMapping(value="/edit_user/{id}")
+    public String editBook(@PathVariable("id") Long userId,Model model){
+    	model.addAttribute("user",urepository.findOne(userId));
+    	return "edit_user";
+    }
+    //save edited user
+    @RequestMapping(value = "save_user", method = RequestMethod.POST)
+    public String saveUser(User user){
+        urepository.save(user);
+    	return "redirect:/userlist";
+    }
+    
+    
+    //edit item
+    @RequestMapping(value="/edit_item/{id}")
+    public String editItem(@PathVariable("id") Long itemId,Model model){
+    	model.addAttribute("item",irepository.findOne(itemId));
+    	model.addAttribute("categorys",crepository.findAll());
+    	//model.addAttribute("users",urepository.findAll());
+    	return "edit_item";
+    };
+    //save edited item
+    @RequestMapping(value = "save_item", method = RequestMethod.POST)
+    public String saveItem(Item item){
+        irepository.save(item);
+    	return "redirect:/items";
+    }
+
 
 	
 	

@@ -6,7 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,6 +19,7 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@NotNull
 	private String title;
 	@NotNull
@@ -24,17 +27,18 @@ public class Item {
 	@NotNull
 	private String condition;
 	@NotNull
-	private String zipcode;
+	private Integer zipcode;
 	@NotNull
+	@DecimalMin(value="0.1")
 	private Double price;
 	
 	//create relationship or * to 1 between items to user
-	/*
+	
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "userid")
 	private User user;
-	*/
+	
 	
 	//Many items can have 1 category * to 1
 	@ManyToOne
@@ -49,7 +53,7 @@ public class Item {
 
 
 	//constructor
-	public Item(String title, String description, String condition, String zipcode, Double price, Category category) {
+	public Item(String title, String description, String condition, Integer zipcode, Double price, Category category, User user) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -58,6 +62,8 @@ public class Item {
 		this.price = price;
 		//added category as a FK in the relationship
 		this.category = category;
+		//added User as FK
+		this.user = user;
 	}	
 	
 	//JPA constructor should be PROTECTED
@@ -92,10 +98,10 @@ public class Item {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	public String getZipcode() {
+	public Integer getZipcode() {
 		return zipcode;
 	}
-	public void setZipcode(String zipcode) {
+	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
 	}
 	public Double getPrice() {
@@ -105,7 +111,7 @@ public class Item {
 		this.price = price;
 	}
 	//setters n getters for relationship
-	/*
+	
 	public User getUser() {
 			return user;
 	}
@@ -113,7 +119,7 @@ public class Item {
 	public void setUser(User user) {
 			this.user = user;
 	}
-	*/
+	
 	
 	//relationship G&S
 	public Category getCategory() {

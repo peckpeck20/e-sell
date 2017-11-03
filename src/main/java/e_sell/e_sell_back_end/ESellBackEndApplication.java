@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
 import e_sell.e_sell_back_end.domain.Item;
+import e_sell.e_sell_back_end.domain.ItemRepository;
 import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
 
@@ -26,7 +27,7 @@ public class ESellBackEndApplication {
 		@Bean
 		public CommandLineRunner demo(UserRepository urepository, CategoryRepository crepository) {
 			return (args) -> {
-				//saving users
+				//create users
 				urepository.save(new User("Jose","Zapata","jose@zapata.com","12345678"));
 				urepository.save(new User("Teddy","Bear","teddy@bear.com","12345678"));
 				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","12345678"));
@@ -37,10 +38,7 @@ public class ESellBackEndApplication {
 				crepository.save(new Category("Services"));
 				crepository.save(new Category("Vehicles"));
 				crepository.save(new Category("Clothes"));
-				
-
-
-				
+						
 				
 				//show all users
 				log.info("SHOWING ALL USERS");

@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!-- Insert Header sources from template -->
-<head th:replace="template :: sources">
-	<title  id="pageTitle">User list</title>
-</head>
-<body>
-<div class="container-fluid">
-	<h1>All users </h1>
-	<table class="table table-striped">
-	  <tr>
-	    <th>First Name </th>
-	    <th>Last Name </th> 
-	    <th>E-Mail </th>
-	    <th>Password </th>
+	<html xmlns:th="http://www.thymeleaf.org">
+	<!-- Insert Header sources from template -->
+	<head th:replace="template :: sources">
+		<title  id="pageTitle">User list</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<!-- insert navBar from template -->
+			<div th:replace="template :: navBar"></div>
+			<h1>All users </h1>
 
-
-	  </tr>
-	  <tr th:each = "user: ${users}">
-	    <td th:text="${user.firstName}"></td>
-	    <td th:text="${user.lastName}"></td>
-	    <td th:text="${user.email}"></td>
-	    <td th:text="${user.password}"></td>
-
-
-
-	  </tr>
-	</table>
-<!-- 	<div style="clear: both; display: block; height: 10px;"></div>
- <a  class="btn btn-success" th:href="@{/addbook}">Add a Book</a>-->
- <a  class="btn btn-success" th:href="@{/signup}">Add a User</a>
-</div>
-	
-	
-</body>
+			<table class="table table-striped">
+			  <tr>
+			    <th>First Name </th>
+			    <th>Last Name </th> 
+			    <th>E-Mail </th>
+			    <th>Password </th>
+			    <th></th>
+			    <th></th>
+			  </tr>
+			  
+			  <tr th:each = "user: ${users}">
+			    <td th:text="${user.firstName}"></td>
+			    <td th:text="${user.lastName}"></td>
+			    <td th:text="${user.email}"></td>
+			    <td th:text="${user.password}"></td>
+			    <td><a class="btn btn-warning" th:href="@{/edit_user/{id}(id=${user.id})}">Edit</a></td>
+			    <td><a class="btn btn-danger" th:href="@{/delete_user{id}(id=${user.id})}">Delete</a></td>
+			  </tr>
+			  
+			</table>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<a  class="btn btn-success" th:href="@{/sign_up}">Add a User</a>
+			<!-- Insert footer template -->
+			<div th:replace="template :: footer"></div>
+		</div>
+	</body>
 </html>

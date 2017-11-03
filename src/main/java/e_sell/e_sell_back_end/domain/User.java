@@ -30,10 +30,11 @@ public class User {
 	@Size(min=7)
 	private String password;
 	
-	/*
-	//user relationship one to * items
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "item")
+	
+	// relationship one user to * items
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 			private List<Item>items;
+	
 //setters n getters for relationship
 	public List<Item> getItems() {
 		return items;
@@ -42,7 +43,7 @@ public class User {
 		this.items = items;
 	}
 	
-	*/
+	
 	//constructor
 	public User(String firstName, String lastName, String email, String password) {
 		super();
@@ -79,6 +80,13 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {

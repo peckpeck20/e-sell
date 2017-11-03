@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert Header sources from template -->
+<head th:replace="template :: sources">
+	<title  id="pageTitle">Edit item</title>
+</head>
+	<body>
+   		<div class="container-fluid">
+			<h1>Edit item</h1>
+			
+			<!-- insert itemForm from template -->
+			<form th:replace="template :: itemForm"></form>
+			
+			<!-- Insert footer template -->
+			<div th:replace="template :: footer"></div>
+		</div>	
+	</body>
+</html>

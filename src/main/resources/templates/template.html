@@ -3,16 +3,128 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <!-- sources fragment -->
 	<head th:fragment="sources">
+		<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link>	
 		<script type="text/javascript" th:src="@{/js/script.js}"></script>
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<!-- #pageTitle references to the ID title posted in each page -->
 		<title th:include=":: #pageTitle"></title>
 	</head>
-	
+<!--  bav var fragment -->	
+
+<div class="navbar navbar-inverse" th:fragment="navBar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".nav-collapse">
+          	<span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/items">E-Sell</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li >
+              <a href="#" th:href="@{/items}">Home</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/items}">Posts</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/userlist}">Users</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/sign_up}">Sign Up</a>
+            </li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+          	<li>
+          		<a href="/signin" th:href="@{/signin}">Sign In</a>
+            </li>
+            <li>
+              <a href="#" th:href="@{/sign_up}">Sign Up</a>
+            </li>
+            <!--  <li th:if="${#authorization.expression('!isAuthenticated()')}"> 
+              <a href="/signin" th:href="@{/signin}">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+              </a>
+            </li>
+           <li th:if="${#authorization.expression('isAuthenticated()')}">  
+              <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+              </a>
+             <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+            </li>
+            -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
 <!-- Footer fragment -->	
 	<p th:fragment="footer">
+		<br></br>
 		Copyright &copy; Jose Zapata 2017
 	</p>
+	
+<form action="#" th:action="@{../save_item}" th:object="${item}" method="post" th:fragment="itemForm">
+					<!-- ID attribute is loaded and hidden from view so we can edit the selected ID and not create a new one -->	 
+					<input type="hidden" th:field="*{id}" class="form-control"/>      
+				    <div class="form-group">
+				    	<label for="firstName">Title:</label>
+				    	<input type="text" class="form-control" id="title" autofocus="autofocus" placeholder="Enter the title of your post" th:field="*{title}" />
+				    	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
+				    </div>
+				
+					<div class="form-group">
+						<label for="category">Category :</label>
+						 <select id="category" th:field="*{category}" class="form-control">
+			      			<option th:each="category : ${categorys}" 
+			      			th:value="${category.id}" 
+			      			th:text="${category.type}"></option>
+				   		</select>		
+					</div>
+									    
+				    <div class="form-group">
+				    <!-- check validation- not working on ZIP and PRICE -->
+				    	<label for="description">Description:</label>
+				    	<textarea name="description" rows="5" cols="10" class="form-control" id="description" placeholder="Enter the description here" th:field="*{description}" >
+				    	
+				    	
+				    	</textarea>
+				    	  <!-- <input type="text" class="form-control" id="description" placeholder="Enter your last Name" th:field="*{description}" />  -->
+				    	<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
+				     
+				    </div>
+				    
+				    <div class="form-group">
+				
+				    	<label for="condition">condition</label>
+				    	<label class="radio-inline"><input type="radio" name="optradio" value="Used" th:field="*{condition}"/>Used</label>
+				    	<label class="radio-inline"><input type="radio" name="optradio" value="New" th:field="*{condition}"/>New</label>
+				    	<label class="radio-inline"><input type="radio" name="optradio" value="Refurbished" th:field="*{condition}"/> Refurbished </label>
+								
+				    	<!--  <input type="text" class="form-control" id="condition"  th:field="*{condition}" />-->
+				    	<div th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}">error</div>
+				    </div>
+				
+				    <div class="form-group">
+				    	<label for="zipcode">Zipcode:</label>
+				    	<input type="number" class="form-control" id="zipcode" placeholder="0000" th:field="*{zipcode}" />
+				    	  <div th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Error</div>
+				    </div>
+				    
+				    <div class="form-group">
+				    	<label for="price">Price:</label>
+				    	<input type="number" class="form-control" id="price" placeholder="00.00" th:field="*{price}" />
+				    	<!--
+				    	<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</div>
+				    	-->
+				    </div>
+				    <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
+				</form>
 
 </html>
