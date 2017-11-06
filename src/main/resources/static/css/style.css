@@ -2,3 +2,11 @@
 body { 
 	padding-top: 60px; 
 }
+/* fixes button position for login page form */	
+.login_form{
+	padding-bottom: 20px;
+}
+/*Fixes sign out button on nav bar */
+.btn-logout {
+  padding:10px;
+}

@@ -187,12 +187,12 @@ public class AppController {
     	return irepository.findOne(itemid);
     }
     
-    //login
-    @RequestMapping(value="/*")
-    public String login() {	
+    //login redirects root and login path
+    @RequestMapping(value={"/","/login"})
+    public String rootDefault() {	
         return "login";
-    }	
- 
+    }
+
 
 	
 	

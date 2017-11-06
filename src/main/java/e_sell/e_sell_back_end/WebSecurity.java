@@ -1,4 +1,4 @@
-package e_sell.e_sell_back_end.domain;
+package e_sell.e_sell_back_end;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +15,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 	http
 	.authorizeRequests()
 	//pages made public
-	.antMatchers("/api", "/itemlist","/sign_up","/css/**", "/js/**").permitAll()
+	.antMatchers("/api/**", "/itemlist","/sign_up","/css/**", "/js/**","/").permitAll()
 	.anyRequest().authenticated()
 	.and()
 	.formLogin()
 	.loginPage("/login")
+	.defaultSuccessUrl("/itemlist")
 	.permitAll()
 	.and()
 	.logout()

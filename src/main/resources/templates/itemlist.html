@@ -8,8 +8,9 @@
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
-			
-			<h1>All Items </h1>
+			<!-- takes username and posts it as greeting -->
+			<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+			<!--<h1>All Items </h1> -->
 			<table class="table table-striped">
 			  <tr>
 			    <th>Title </th>
