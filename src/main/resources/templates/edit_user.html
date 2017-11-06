@@ -9,7 +9,7 @@
    			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
 			<h1>Edit user</h1>
-			<!-- ../  -->
+			<!-- .. needed to edit user not to create  -->
 		    <form action="#" th:action="@{../save_user}" th:object="${user}" method="post">
 		    <!-- ID attribute is loaded and hidden from view so we can edit the selected ID and not create a new one -->
 		    <input type="hidden" th:field="*{id}" class="form-control"/>	    

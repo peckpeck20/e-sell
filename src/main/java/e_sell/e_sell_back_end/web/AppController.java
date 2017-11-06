@@ -1,7 +1,9 @@
 package e_sell.e_sell_back_end.web;
 
-import javax.validation.Valid;
 
+
+import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
 import e_sell.e_sell_back_end.domain.Item;
 import e_sell.e_sell_back_end.domain.ItemRepository;
@@ -90,15 +94,15 @@ public class AppController {
 		}
 		//if its correct proceed to add user to model
 		irepository.save(item);
-		return "redirect:/items";
+		return "redirect:/itemlist";
 	}
 	
 	//list all items
-    @RequestMapping(value ="/items")
+    @RequestMapping(value ="/itemlist")
     public String itemList(Model model) {
     	//add all items to Model
         model.addAttribute("items", irepository.findAll());
-        return "items";
+        return "itemlist";
     }
     
     //root redirect 
@@ -146,9 +150,49 @@ public class AppController {
     @RequestMapping(value = "save_item", method = RequestMethod.POST)
     public String saveItem(Item item){
         irepository.save(item);
-    	return "redirect:/items";
+    	return "redirect:/itemlist";
     }
+    //REST service
+	@RequestMapping(value = "/users" ,method = RequestMethod.GET)
+    public @ResponseBody List<User> userListRest(){
+    	return (List<User>) urepository.findAll();
+    }
+	
+	@RequestMapping(value = "/items" ,method = RequestMethod.GET)
+    public @ResponseBody List<Item> itemListRest(){
+    	return (List<Item>) irepository.findAll();
+    }
+	
 
+	@RequestMapping(value = "/categories" ,method = RequestMethod.GET)
+    public @ResponseBody List<Category> categoryListRest(){
+    	return (List<Category>) crepository.findAll();
+    }
+	
+	//REST service - get by ID
+    @RequestMapping(value="/user/{id}", method = RequestMethod.GET)
+    public @ResponseBody User findUserRest(@PathVariable("id")Long userid){
+    	return urepository.findOne(userid);
+    }
+    
+    @RequestMapping(value="/category/{id}", method = RequestMethod.GET)
+    public @ResponseBody Category findCategoryRest(@PathVariable("id")Long categoryid){
+    	return crepository.findOne(categoryid);
+    }
+    /*
+     * not showing Category
+     */
+    @RequestMapping(value="/item/{id}", method = RequestMethod.GET)
+    public @ResponseBody Item findItemRest(@PathVariable("id")Long itemid){
+    	return irepository.findOne(itemid);
+    }
+    
+    //login
+    @RequestMapping(value="/*")
+    public String login() {	
+        return "login";
+    }	
+ 
 
 	
 	

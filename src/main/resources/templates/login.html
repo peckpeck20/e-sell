@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert Header sources from template -->
+<head th:replace="template :: sources">
+	<title  id="pageTitle">Login to E-Sell</title>
+</head>
+	<body>
+		<div class="container-fluid text-center">
+			<h1>Login to E-Sell</h1>
+			    <form th:action="@{/login}" method="post">
+		            <div class="form-group">
+		            	<label> Username : <input type="text" name="username" class="form-control"/> </label>
+		            </div>
+		            <div class="form-group">
+		            	<label> Password: <input type="password" name="password" class="form-control"/> </label>
+		            </div>
+		            <div><input class="btn btn-success" type="submit" value="Sign In"/></div>
+		        </form>
+		        <a  th:href="@{/sign_up}">Sign Up</a>
+			<div th:replace="template :: footer"></div>
+		</div>
+	</body>
+</html>
