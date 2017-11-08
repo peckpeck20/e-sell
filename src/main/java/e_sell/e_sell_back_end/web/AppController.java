@@ -81,7 +81,7 @@ public class AppController {
 		//add categories
 		model.addAttribute("categorys",crepository.findAll());
 		//add user
-		model.addAttribute("users",urepository.findAll());
+		//model.addAttribute("users",urepository.findAll());
 		return "add_item";
 	}
 	
