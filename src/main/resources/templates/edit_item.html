@@ -7,10 +7,8 @@
 	<body>
    		<div class="container-fluid">
 			<h1>Edit item</h1>
-			
-			<!-- insert itemForm from template -->
-			<form th:replace="template :: itemForm"></form>
-			
+			<!-- insert itemForm from template with custom action  -->
+			<form th:replace="template :: itemForm(action='../save_item')"></form>
 			<!-- Insert footer template -->
 			<div th:replace="template :: footer"></div>
 		</div>	

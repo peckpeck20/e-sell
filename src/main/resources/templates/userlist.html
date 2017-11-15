@@ -15,7 +15,9 @@
 			    <th>First Name </th>
 			    <th>Last Name </th> 
 			    <th>E-Mail </th>
+			    <th>Username</th>
 			    <th>Password </th>
+			    <th>Role </th>
 			    <th></th>
 			    <th></th>
 			  </tr>
@@ -24,9 +26,12 @@
 			    <td th:text="${user.firstName}"></td>
 			    <td th:text="${user.lastName}"></td>
 			    <td th:text="${user.email}"></td>
+			    <td th:text="${user.username}"></td>
 			    <td th:text="${user.password}"></td>
+			    <td th:text="${user.role}"></td>
 			    <td><a class="btn btn-warning" th:href="@{/edit_user/{id}(id=${user.id})}">Edit</a></td>
-			    <td><a class="btn btn-danger" th:href="@{/delete_user{id}(id=${user.id})}">Delete</a></td>
+			    <!-- only admin account can delete user -->
+			    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete_user{id}(id=${user.id})}">Delete</a></td>
 			  </tr>
 			  
 			</table>

@@ -19,7 +19,6 @@ import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
 import e_sell.e_sell_back_end.domain.Item;
 import e_sell.e_sell_back_end.domain.ItemRepository;
-import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
 
 
@@ -50,6 +49,7 @@ public class AppController {
 	//1.create empty User object and add to model
 	@GetMapping("/sign_up")
 	public String signUpForm(Model model){
+		
 		model.addAttribute("user", new User());
 		return "sign_up";
 	}
@@ -62,6 +62,7 @@ public class AppController {
 			return "sign_up";
 		}
 		//if its correct proceed to add user to model
+		
 		urepository.save(user);
 		return "redirect:/add_item";
 	}
@@ -188,11 +189,11 @@ public class AppController {
     }
     
     //login redirects root and login path
+
     @RequestMapping(value={"/","/login"})
     public String rootDefault() {	
         return "login";
     }
-
 
 	
 	

@@ -8,8 +8,8 @@
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
-			<!-- takes username and posts it as greeting -->
-			<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+			<!-- takes username and posts it as greeting if its authentificated -->
+			<h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! </h1>
 			<!--<h1>All Items </h1> -->
 			<table class="table table-striped">
 			  <tr>
@@ -19,7 +19,9 @@
 			    <th>Condition </th>
 			    <th>Zipcode </th>
 			    <th>Price </th>
-		
+			    <th>Posted by</th>
+			    <th></th>
+				<th></th>
 		
 			  </tr>
 			  <tr th:each ="item: ${items}">
@@ -29,6 +31,10 @@
 			    <td th:text="${item.condition}"></td>
 			    <td th:text="${item.zipcode}"></td>
 			    <td th:text="${item.price}"></td>
+			    <td th:text="${item.user}"></td>
+			    <td><a class="btn btn-warning" th:href="@{/edit_item/{id}(id=${item.id})}">Edit</a></td>
+			     <!-- only admin account can delete user -->
+			    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete_item{id}(id=${item.id})}">Delete</a></td>
 		
 		
 		

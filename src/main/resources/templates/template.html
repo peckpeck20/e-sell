@@ -12,6 +12,7 @@
 		<!-- #pageTitle references to the ID title posted in each page -->
 		<title th:include=":: #pageTitle"></title>
 	</head>
+
 <!--  bav var fragment -->	
 	<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navBar">
     <div class="container-fluid">
@@ -23,7 +24,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/itemlist">E-Sell</a>
+            <a class="navbar-brand" href="/itemlist"><img src="https://vignette3.wikia.nocookie.net/mrrobot/images/8/87/ECorp.png/revision/latest?cb=20150602024409" alt="logo"/></a>
         </div>
         
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,7 +40,8 @@
             
              <ul class="nav navbar-nav navbar-right">
           	<li>
-          		<a th:href="@{/login}">Sign In</a>
+          		<!-- Only shown if user isn't logged in -->
+          		<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Sign In</a>
             </li>
             <li>
             		<form th:action="@{/logout}" method="post" class="btn-logout">
@@ -53,68 +55,101 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-
 <!-- Footer fragment -->	
 	<p th:fragment="footer">
 		<br></br>
 		 Jose Zapata &copy; 2017
 	</p>
-	
-<form action="#" th:action="@{../save_item}" th:object="${item}" method="post" th:fragment="itemForm">
-					<!-- ID attribute is loaded and hidden from view so we can edit the selected ID and not create a new one -->	 
-					<input type="hidden" th:field="*{id}" class="form-control"/>      
-				    <div class="form-group">
-				    	<label for="firstName">Title:</label>
-				    	<input type="text" class="form-control" id="title" autofocus="autofocus" placeholder="Enter the title of your post" th:field="*{title}" />
-				    	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
-				    </div>
+<!-- Item form - action is defined on each call of this fragment  -->	
+<form action="#" th:action="@{${action}}" th:object="${item}" method="post" th:fragment="itemForm">
+	<!-- ID attribute is loaded and hidden from view so we can edit the selected ID and not create a new one -->	 
+	<input type="hidden" th:field="*{id}" class="form-control"/>
+	<!--  <input type="hidden" th:field="*{user}" class="form-control"/>      -->
+    <div class="form-group">
+    	<label for="firstName">Title:</label>
+    	<input type="text" class="form-control" id="title" autofocus="autofocus" placeholder="Enter the title of your post" th:field="*{title}" />
+    	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
+    </div>
+
+	<div class="form-group">
+		<label for="category">Category :</label>
+		 <select id="category" th:field="*{category}" class="form-control">
+     			<option th:each="category : ${categorys}" 
+     			th:value="${category.id}" 
+     			th:text="${category.type}"></option>
+   		</select>		
+	</div>
+					    
+    <div class="form-group">
+    <!-- check validation- not working on ZIP and PRICE -->
+    	<label for="description">Description:</label>
+    	<textarea name="description" rows="5" cols="10" class="form-control" id="description" placeholder="Enter the description here" th:field="*{description}" >
+    	
+    	
+    	</textarea>
+    	  <!-- <input type="text" class="form-control" id="description" placeholder="Enter your last Name" th:field="*{description}" />  -->
+    	<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
+     
+    </div>
+    
+    <div class="form-group">
+
+    	<label for="condition">condition</label>
+    	<label class="radio-inline"><input type="radio" name="optradio" value="Used" th:field="*{condition}"/>Used</label>
+    	<label class="radio-inline"><input type="radio" name="optradio" value="New" th:field="*{condition}"/>New</label>
+    	<label class="radio-inline"><input type="radio" name="optradio" value="Refurbished" th:field="*{condition}"/> Refurbished </label>
 				
-					<div class="form-group">
-						<label for="category">Category :</label>
-						 <select id="category" th:field="*{category}" class="form-control">
-			      			<option th:each="category : ${categorys}" 
-			      			th:value="${category.id}" 
-			      			th:text="${category.type}"></option>
-				   		</select>		
-					</div>
-									    
-				    <div class="form-group">
-				    <!-- check validation- not working on ZIP and PRICE -->
-				    	<label for="description">Description:</label>
-				    	<textarea name="description" rows="5" cols="10" class="form-control" id="description" placeholder="Enter the description here" th:field="*{description}" >
-				    	
-				    	
-				    	</textarea>
-				    	  <!-- <input type="text" class="form-control" id="description" placeholder="Enter your last Name" th:field="*{description}" />  -->
-				    	<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
-				     
-				    </div>
-				    
-				    <div class="form-group">
-				
-				    	<label for="condition">condition</label>
-				    	<label class="radio-inline"><input type="radio" name="optradio" value="Used" th:field="*{condition}"/>Used</label>
-				    	<label class="radio-inline"><input type="radio" name="optradio" value="New" th:field="*{condition}"/>New</label>
-				    	<label class="radio-inline"><input type="radio" name="optradio" value="Refurbished" th:field="*{condition}"/> Refurbished </label>
-								
-				    	<!--  <input type="text" class="form-control" id="condition"  th:field="*{condition}" />-->
-				    	<div th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}">error</div>
-				    </div>
-				
-				    <div class="form-group">
-				    	<label for="zipcode">Zipcode:</label>
-				    	<input type="number" class="form-control" id="zipcode" placeholder="0000" th:field="*{zipcode}" />
-				    	  <div th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Error</div>
-				    </div>
-				    
-				    <div class="form-group">
-				    	<label for="price">Price:</label>
-				    	<input type="number" class="form-control" id="price" placeholder="00.00" th:field="*{price}" />
-				    	<!--
-				    	<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</div>
-				    	-->
-				    </div>
-				    <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
-				</form>
+    	<!--  <input type="text" class="form-control" id="condition"  th:field="*{condition}" />-->
+    	<div th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}">error</div>
+    </div>
+
+    <div class="form-group">
+    	<label for="zipcode">Zipcode:</label>
+    	<input type="number" class="form-control" id="zipcode" placeholder="0000" th:field="*{zipcode}" />
+    	  <div th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Error</div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="price">Price:</label>
+    	<input type="number" class="form-control" id="price" placeholder="00.00" th:field="*{price}" />
+    	<!--
+    	<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</div>
+    	-->
+    </div>
+    <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
+</form>
+
+<!-- user form - action is defined on each call of this fragment -->
+<form action="#" th:action="@{${action}}" th:object="${user}" method="post" th:fragment="userForm">
+	<div class="form-group">
+		<label for="firstName">First Name:</label>
+		<input type="text" class="form-control" id="firstName" autofocus="autofocus" placeholder="Enter your first Name" th:field="*{firstName}" />
+		<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</div>
+	</div>
+	<div class="form-group">
+		<label for="lastName">Last Name:</label>
+		<input type="text" class="form-control" id="lastName" placeholder="Enter your last Name" th:field="*{lastName}" />
+		<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</div>
+	</div>
+	<div class="form-group">
+		<label for="email">E-Mail:</label>
+		<input type="email" class="form-control" id="email" placeholder="email@you.com" aria-describedby="emailHelp" th:field="*{email}" />
+		<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
+	</div>
+		<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" placeholder="Enter your username " th:field="*{username}" />
+		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</div>
+	</div>
+	<div class="form-group">
+	<!-- Include double password input and validate Feature -->
+		<label for="password">Password:</label>
+		<input type="password" name="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" />
+		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</div>
+	</div>
+	<input type="hidden" class="form-control" id="role"  th:field="*{role}"  th:value="USER" />
+	<p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
+</form>
 
 </html>

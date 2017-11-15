@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
-import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
+import e_sell.e_sell_back_end.web.User;
 
 
 @SpringBootApplication
@@ -26,9 +26,9 @@ public class ESellBackEndApplication {
 		public CommandLineRunner demo(UserRepository urepository, CategoryRepository crepository) {
 			return (args) -> {
 				//create users
-				urepository.save(new User("Jose","Zapata","jose@zapata.com","12345678"));
-				urepository.save(new User("Teddy","Bear","teddy@bear.com","12345678"));
-				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","12345678"));
+				urepository.save(new User("Jose","Zapata","jose@zapata.com","peckpeck","1234567","ADMIN"));
+				urepository.save(new User("Teddy","Bear","teddy@bear.com","tedy200","12345678","USER"));
+				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","yuka2017","12345678","USER"));
 				
 				//create categories
 				crepository.save(new Category("Home"));

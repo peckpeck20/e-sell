@@ -1,72 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 	<!-- Insert Header sources from template -->
 	<head th:replace="template :: sources">
 		<title  id="pageTitle">Sell your item</title>
 	</head>
-
 	<body>
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
 			<h1>What are you selling ? </h1>
-			  
-		    <form action="#" th:action="@{/add_item}" th:object="${item}" method="post">	    
-		   
-			    <div class="form-group">
-			    	<label for="firstName">Title:</label>
-			    	<input type="text" class="form-control" id="title" autofocus="autofocus" placeholder="Enter the title of your post" th:field="*{title}" />
-			    	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
-			    </div>
-			
-				<div class="form-group">
-					<label for="category">Category :</label>
-					 <select id="category" th:field="*{category}" class="form-control">
-		       			<option th:each="category : ${categorys}" 
-		       			th:value="${category.id}" 
-		       			th:text="${category.type}"></option>
-		    		</select>		
-				</div>
-			    
-			    <div class="form-group">
-			    <!-- check validation- not working on ZIP and PRICE -->
-			    	<label for="description">Description:</label>
-			    	<textarea name="description" rows="5" cols="10" class="form-control" id="description" placeholder="Enter the description here" th:field="*{description}" >
-			    	
-			    	
-			    	</textarea>
-			    	  <!-- <input type="text" class="form-control" id="description" placeholder="Enter your last Name" th:field="*{description}" />  -->
-			    	<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</div>
-			     
-			    </div>
-			    
-			    <div class="form-group">
-			    	<label for="condition">condition</label>
-			    	<label class="radio-inline"><input type="radio" name="optradio" value="Used" th:field="*{condition}"/>Used</label>
-			    	<label class="radio-inline"><input type="radio" name="optradio" value="New" th:field="*{condition}"/>New</label>
-			    	<label class="radio-inline"><input type="radio" name="optradio" value="Refurbished" th:field="*{condition}"/> Refurbished </label>
-	  				
-			    	<!--  <input type="text" class="form-control" id="condition"  th:field="*{condition}" />-->
-			    	<div th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}">error</div>
-			    </div>
-	
-			    <div class="form-group">
-			    	<label for="zipcode">Zipcode:</label>
-			    	<input type="number" class="form-control" id="zipcode" placeholder="0000" th:field="*{zipcode}" />
-			    	  <div th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Error</div>
-			    </div>
-			    
-			    <div class="form-group">
-			    	<label for="price">Price:</label>
-			    	<input type="number" class="form-control" id="price" placeholder="00.00" th:field="*{price}" />
-			    	<!--
-			    	<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</div>
-			    	-->
-			    </div>
-			    
-			    <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
-			</form>
+			<!-- insert item form  -->
+			<form th:replace="template :: itemForm(action='add_item')" ></form>			  
 		    <!-- Insert footer template -->
 		    <div th:replace="template :: footer"></div>
 		</div>	     

@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import e_sell.e_sell_back_end.web.User;
+
 
 @Entity
 public class Item {
