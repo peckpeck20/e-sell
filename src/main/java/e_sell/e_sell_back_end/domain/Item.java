@@ -28,54 +28,39 @@ public class Item {
 	private long id;
 	
 	@NotNull
+	@Column(name="title")
 	private String title;
+	
 	@NotNull
+	@Column(name="description")
 	private String description;
+	
 	@NotNull
+	@Column(name="condition")
 	private String condition;
+	
 	@NotNull
+	@Column(name="zipcode")
 	private Integer zipcode;
+	
 	@NotNull
-	private BigDecimal price;
+	@Column(name="price")
+	private Double price;
 	
-	//create relationship or * to 1 between items to user
-	
-	//@ManyToOne
-	//@JsonIgnore
-	//@JoinColumn(name = "userid")
-	//private User user;
-	
-	
-	
-	//Many items can have 1 category * to 1
-	//@ManyToOne
-    /*entity relationship will
-    cause endless loop (First student is serialized and it contains
-    department which is then serialized which contains students which
-    are then serialized
-    
-    @JsonIgnore
-	@JoinColumn(name = "categoryid")
-	private Category category;
-*/
 
-	//constructor
+	public Item(){}
 	//
-	public Item(String title, String description, String condition, Integer zipcode, BigDecimal price) {
+	public Item(String title, String description, String condition, Integer zipcode, Double price) {
 		super();
 		this.title = title;
 		this.description = description;
 		this.condition = condition;
 		this.zipcode = zipcode;
 		this.price = price;
-		//added category as a FK in the relationship
-		//this.category = category;
-		//added User as FK
-		//this.user = user;
+
 	}	
 	
-	//JPA constructor should be PROTECTED
-	public Item(){}
+
 	
 	
 
@@ -112,39 +97,19 @@ public class Item {
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
 	}
-	public BigDecimal getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
-	//setters n getters for relationship
-	/*
-	public User getUser() {
-			return user;
-	}
-
-	public void setUser(User user) {
-			this.user = user;
-	}
-	
-	
-	//relationship G&S
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	*/
-	
-	
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", title=" + title + ", description=" + description + ", condition=" + condition
 				+ ", zipcode=" + zipcode + ", price=" + price + "]";
 	}
+
+	
 
 
 

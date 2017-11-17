@@ -73,7 +73,7 @@
 		<label for="category">Category :</label>
 		 <select id="category" th:field="*{category}" class="form-control">
      			<option th:each="category : ${categorys}" 
-     			th:value="${category.id}" 
+     			th:value="${category.categoryid}" 
      			th:text="${category.type}"></option>
    		</select>		
 	</div>
