@@ -7,8 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
 
+//used by Spring security to authenticate n validate users
 @Service
 public class UserService implements UserDetailsService {
 private final UserRepository repository;

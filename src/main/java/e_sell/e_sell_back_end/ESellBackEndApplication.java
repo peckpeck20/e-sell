@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
+import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
-import e_sell.e_sell_back_end.web.User;
 
 
 @SpringBootApplication

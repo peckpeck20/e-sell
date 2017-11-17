@@ -1,4 +1,4 @@
-package e_sell.e_sell_back_end.web;
+package e_sell.e_sell_back_end.domain;
 
 import java.util.List;
 
@@ -9,31 +9,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import e_sell.e_sell_back_end.domain.Item;
-
 @Entity
+@Table(name="user")
 public class User {
 	//generated ID column 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name= "id",nullable=false,updatable=false)
+	@Column(name= "userid",nullable=false,updatable=false)
 	private long id;
 	
 	@NotNull
+	@Column(name="firstname")
 	@Size(min=2,max=30)
 	private String firstName;
 	
 	@NotNull
 	@Size(min=2,max=30)
+	@Column(name="lastname")
 	private String lastName;
+	
 	@NotNull
 	@Size(min=2,max=50)
-	//username will be email
+	@Column(name="email")
 	private String email;
-	
+	 // Username with unique constraint
 	@Column(name="username",nullable=false,unique=true)
 	private String username;
 
@@ -123,9 +126,9 @@ public class User {
 				+ ", username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
 	
-	
+	/*
 	// relationship one user to * items
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
 			private List<Item>items;
 	
 //setters n getters for relationship
@@ -136,7 +139,7 @@ public class User {
 		this.items = items;
 	}
 	
-	
+	*/
 
 	
 	

@@ -3,26 +3,32 @@ package e_sell.e_sell_back_end.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="category")
 public class Category {
 	//@id creates an ID column for the table
 	@Id
 	//Generates automatically a unique PK for every new entity object
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="categoryid")
 	private Long id;
+	@Column(name="type")
 	private String type;
 	
+	/*
 	// 1 Category can have * Items
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-	private List<Item> items;
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid")
+	private List<Item> item;
+	*/
 
 	//constructor
 	public Category() {}
@@ -48,6 +54,7 @@ public class Category {
 		this.type = type;
 	}
 	//getters n setters for relationship
+	/*
 	public List<Item> getItems() {
 		return items;
 	}
@@ -55,7 +62,7 @@ public class Category {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-
+*/
 
 
 	@Override

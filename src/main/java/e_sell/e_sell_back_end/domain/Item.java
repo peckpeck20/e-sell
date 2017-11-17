@@ -1,25 +1,30 @@
 package e_sell.e_sell_back_end.domain;
 
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.DecimalMin;
+import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
+
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import e_sell.e_sell_back_end.web.User;
-
 
 @Entity
+@Table(name="item")
 public class Item {
 	//generated ID column 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="itemid")
 	private long id;
 	
 	@NotNull
@@ -31,31 +36,32 @@ public class Item {
 	@NotNull
 	private Integer zipcode;
 	@NotNull
-	@DecimalMin(value="0.1")
-	private Double price;
+	private BigDecimal price;
 	
 	//create relationship or * to 1 between items to user
 	
-	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "userid")
-	private User user;
+	//@ManyToOne
+	//@JsonIgnore
+	//@JoinColumn(name = "userid")
+	//private User user;
+	
 	
 	
 	//Many items can have 1 category * to 1
-	@ManyToOne
+	//@ManyToOne
     /*entity relationship will
     cause endless loop (First student is serialized and it contains
     department which is then serialized which contains students which
     are then serialized
-    */
+    
     @JsonIgnore
 	@JoinColumn(name = "categoryid")
 	private Category category;
-
+*/
 
 	//constructor
-	public Item(String title, String description, String condition, Integer zipcode, Double price, Category category, User user) {
+	//
+	public Item(String title, String description, String condition, Integer zipcode, BigDecimal price) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -63,9 +69,9 @@ public class Item {
 		this.zipcode = zipcode;
 		this.price = price;
 		//added category as a FK in the relationship
-		this.category = category;
+		//this.category = category;
 		//added User as FK
-		this.user = user;
+		//this.user = user;
 	}	
 	
 	//JPA constructor should be PROTECTED
@@ -106,14 +112,14 @@ public class Item {
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
 	}
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	//setters n getters for relationship
-	
+	/*
 	public User getUser() {
 			return user;
 	}
@@ -131,7 +137,7 @@ public class Item {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
+	*/
 	
 	
 	@Override

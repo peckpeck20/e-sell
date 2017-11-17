@@ -19,6 +19,8 @@ import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
 import e_sell.e_sell_back_end.domain.Item;
 import e_sell.e_sell_back_end.domain.ItemRepository;
+import e_sell.e_sell_back_end.domain.SignupForm;
+import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
 
 
@@ -46,7 +48,7 @@ public class AppController {
 		return "categorylist";
 	}
 
-	//1.create empty User object and add to model
+	//1.create an empty form object and add to model
 	@GetMapping("/sign_up")
 	public String signUpForm(Model model){
 		
@@ -94,6 +96,7 @@ public class AppController {
 			return "add_item";
 		}
 		//if its correct proceed to add user to model
+		//item.setPrice(new BigDecimal(0));
 		irepository.save(item);
 		return "redirect:/itemlist";
 	}

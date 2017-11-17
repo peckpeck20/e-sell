@@ -9,6 +9,7 @@ body {
 /*Fixes sign out button on nav bar */
 .btn-logout {
   padding:10px;
+  margin-right:27px;
 }
 /*fix logo */
 
@@ -21,6 +22,6 @@ body {
 	padding-right:5px;
     height: auto;
     width: auto;
-    max-height: 52px;
+    max-height: 55px;
     max-width: 150px;
 }
