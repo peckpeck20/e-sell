@@ -5,10 +5,22 @@
 		<title  id="pageTitle">Category List</title>
 	</head>
 	<body>
-		<h1>It works</h1>
+		<div class="container-fluid">
+			<!-- insert navBar from template -->
+			<div th:replace="template :: navBar"></div>
+			<h1>Category List</h1>
+			<table  class="table table-striped">
+				<tr>
+					<th>Type:</th>
+				</tr>
+				<tr>
+					<th  th:each ="category: ${categories}" ></th>
+					<td th:text="${category.type}"></td>
+				</tr>
+			</table>
 	
-	
-		<!-- Insert footer template -->
-	<div th:replace="template :: footer"></div>
+			<!-- Insert footer template -->
+			<div th:replace="template :: footer"></div>
+		</div>
 	</body>
 </html>

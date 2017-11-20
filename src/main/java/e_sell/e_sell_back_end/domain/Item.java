@@ -1,5 +1,8 @@
 package e_sell.e_sell_back_end.domain;
 
+
+
+
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -12,10 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import javax.validation.constraints.NotNull;
-
-
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
 
 
 @Entity
@@ -25,95 +30,119 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="itemid")
-	private long id;
+	private Long id;
 	
-	@NotNull
+	
 	@Column(name="title")
 	private String title;
 	
-	@NotNull
 	@Column(name="description")
 	private String description;
 	
-	@NotNull
-	@Column(name="condition")
-	private String condition;
+	@Column(name="status")
+	private String status;
 	
-	@NotNull
-	@Column(name="zipcode")
+	
+	@Column(name="zipcode",length=5)
 	private Integer zipcode;
 	
-	@NotNull
 	@Column(name="price")
 	private Double price;
 	
+	//create relationship or * to 1 between items to user
+	/*
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "userid")
+	private User user;
+	*/
+	
+	//Many items can have 1 category * to 1
+	@ManyToOne
+    /*entity relationship will
+    cause endless loop (First item is serialized and it contains
+    category which is then serialized which contains students which
+    are then serialized
+    */
+    @JsonIgnore
+	@JoinColumn(name = "categoryid")
+private Category category;
 
-	public Item(){}
-	//
-	public Item(String title, String description, String condition, Integer zipcode, Double price) {
+	//working ^^
+	//JPA constructor
+	public Item(){
+	
+	}
+
+	public Item(Long id, String title, String description, String status, Integer zipcode, Double price,
+			Category category) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.condition = condition;
+		this.status = status;
 		this.zipcode = zipcode;
 		this.price = price;
+		this.category = category;
+	}
 
-	}	
-	
-
-	
-	
-
-	//getter n setter
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCondition() {
-		return condition;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setCondition(String condition) {
-		this.condition = condition;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
+
 	public Integer getZipcode() {
 		return zipcode;
 	}
+
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
 	}
+
 	public Double getPrice() {
 		return price;
 	}
+
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	@Override
-	public String toString() {
-		return "Item [id=" + id + ", title=" + title + ", description=" + description + ", condition=" + condition
-				+ ", zipcode=" + zipcode + ", price=" + price + "]";
+
+	public Category getCategory() {
+		return category;
 	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
-
-
-
 	
-	
-
 }
+
+	

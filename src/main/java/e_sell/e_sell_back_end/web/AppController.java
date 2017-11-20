@@ -42,9 +42,10 @@ public class AppController {
 	public String correctPage(){
 		return "correct";
 	}
-	//for testing purposes
+	//show all categories
 	@RequestMapping("/categorylist")
-	public String showCategories(){
+	public String showCategories(Model model){
+		model.addAttribute("categories", crepository.findAll());
 		return "categorylist";
 	}
 
@@ -109,15 +110,7 @@ public class AppController {
         return "itemlist";
     }
     
-    //root redirect 
-    /*
-    @RequestMapping(value ="/*")
-    public String rootRedirect(Model model) {
-    	//add all items to Model
-        model.addAttribute("items", irepository.findAll());
-        return "redirect:/items";
-    }
-    */
+
     
     //delete a user
     //in value we take the ID
@@ -142,6 +135,7 @@ public class AppController {
     }
     
     
+    
     //edit item
     @RequestMapping(value="/edit_item/{id}")
     public String editItem(@PathVariable("id") Long itemId,Model model){
@@ -155,6 +149,12 @@ public class AppController {
     public String saveItem(Item item){
         irepository.save(item);
     	return "redirect:/itemlist";
+    }
+    //delete item
+    @RequestMapping(value="/delete_item/{id}",method=RequestMethod.GET)
+    public String deleteItem(@PathVariable("id") Long itemId,Model model){
+       	irepository.delete(itemId);
+		return "redirect:/itemlist";
     }
     //REST service
 	@RequestMapping(value = "/users" ,method = RequestMethod.GET)

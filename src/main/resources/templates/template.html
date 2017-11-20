@@ -35,6 +35,9 @@
             <li>
               <a href="#" th:href="@{/userlist}">Users</a>
             </li>
+             <li>
+              <a href="#" th:href="@{/categorylist}">Categories</a>
+            </li>
             </ul>
             
              <ul class="nav navbar-nav navbar-right">
@@ -43,11 +46,9 @@
           		<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Sign In</a>
             </li>
             <li>
-            		<form th:action="@{/logout}" method="post" class="btn-logout">
-			<input type="submit" value="Sign Out" class="btn btn-danger"/>
-		</form>
-             
-             
+            	<form th:action="@{/logout}" method="post" class="btn-logout">
+					<input type="submit" value="Sign Out" class="btn btn-danger"/>
+				</form>
             </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -61,10 +62,10 @@
 <!-- Item form - action is defined on each call of this fragment  -->	
 <form action="#" th:action="@{${action}}" th:object="${item}" method="post" th:fragment="itemForm">
 	<!-- ID attribute is loaded and hidden from view so we can edit the selected ID and not create a new one -->	 
-	<input type="hidden" th:field="*{id}" class="form-control"/>
+	 <input type="hidden" th:field="*{id}" class="form-control"/>  
 	<!--  <input type="hidden" th:field="*{user}" class="form-control"/>      -->
     <div class="form-group">
-    	<label for="firstName">Title:</label>
+    	<label for="title">Title:</label>
     	<input type="text" class="form-control" id="title" autofocus="autofocus" placeholder="Enter the title of your post" th:field="*{title}" />
     	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
     </div>
@@ -73,7 +74,7 @@
 		<label for="category">Category :</label>
 		 <select id="category" th:field="*{category}" class="form-control">
      			<option th:each="category : ${categorys}" 
-     			th:value="${category.categoryid}" 
+     			th:value="${category.id}" 
      			th:text="${category.type}"></option>
    		</select>		
 	</div>
@@ -91,14 +92,12 @@
     </div>
     
     <div class="form-group">
-
     	<label for="condition">condition</label>
-    	<label class="radio-inline"><input type="radio" name="optradio" value="Used" th:field="*{condition}"/>Used</label>
-    	<label class="radio-inline"><input type="radio" name="optradio" value="New" th:field="*{condition}"/>New</label>
-    	<label class="radio-inline"><input type="radio" name="optradio" value="Refurbished" th:field="*{condition}"/> Refurbished </label>
-				
-    	<!--  <input type="text" class="form-control" id="condition"  th:field="*{condition}" />-->
-    	<div th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}">error</div>
+    	<label class="radio-inline"><input type="radio" name="optradio" value="Used" th:field="*{status}"/>Used</label>
+    	<label class="radio-inline"><input type="radio" name="optradio" value="New" th:field="*{status}"/>New</label>
+    	<label class="radio-inline"><input type="radio" name="optradio" value="Refurbished" th:field="*{status}"/> Refurbished </label>			
+    	<!--  <input type="text" class="form-control" id="status"  th:field="*{status}" />-->
+    	<div th:if="${#fields.hasErrors('status')}" th:errors="*{status}">error</div>
     </div>
 
     <div class="form-group">

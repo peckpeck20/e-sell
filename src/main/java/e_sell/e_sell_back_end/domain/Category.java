@@ -24,11 +24,11 @@ public class Category {
 	@Column(name="type")
 	private String type;
 	
-	/*
+	
 	// 1 Category can have * Items
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Item> item;
-	*/
+	
 
 	//constructor
 	public Category() {}
@@ -54,15 +54,15 @@ public class Category {
 		this.type = type;
 	}
 	//getters n setters for relationship
-	/*
+	
 	public List<Item> getItems() {
-		return items;
+		return item;
 	}
 
-	public void setItems(List<Item> items) {
-		this.items = items;
+	public void setItems(List<Item> item) {
+		this.item = item;
 	}
-*/
+
 
 
 	@Override
