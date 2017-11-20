@@ -36,18 +36,25 @@ public class AppController {
 	@Autowired
 	private CategoryRepository crepository;
 	
-	
+    //login redirects root and login path
+
+    @RequestMapping(value={"/"})
+    public String rootDefault() {	
+        return "itemlist";
+    }
+    
+    @RequestMapping(value={"/login"})
+    public String loginReq() {	
+        return "login";
+    }
+    
+
 	//for testing purposes
 	@RequestMapping("/correct")
 	public String correctPage(){
 		return "correct";
 	}
-	//show all categories
-	@RequestMapping("/categorylist")
-	public String showCategories(Model model){
-		model.addAttribute("categories", crepository.findAll());
-		return "categorylist";
-	}
+
 
 	//1.create an empty form object and add to model
 	@GetMapping("/sign_up")
@@ -102,13 +109,20 @@ public class AppController {
 		return "redirect:/itemlist";
 	}
 	
-	//list all items
+	//Show all items
     @RequestMapping(value ="/itemlist")
     public String itemList(Model model) {
     	//add all items to Model
         model.addAttribute("items", irepository.findAll());
         return "itemlist";
     }
+    
+	//show all categories
+	@RequestMapping(value="/categorylist")
+	public String categoryList(Model model){
+		model.addAttribute("categorys", crepository.findAll());
+		return "categorylist";
+	}
     
 
     
@@ -191,12 +205,9 @@ public class AppController {
     	return irepository.findOne(itemid);
     }
     
-    //login redirects root and login path
 
-    @RequestMapping(value={"/","/login"})
-    public String rootDefault() {	
-        return "login";
-    }
+    
+
 
 	
 	

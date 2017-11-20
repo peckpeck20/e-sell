@@ -2,20 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<!-- Insert Header sources from template -->
 	<head th:replace="template :: sources">
-		<title  id="pageTitle">Category List</title>
+		<title  id="pageTitle">Shop by Categories</title>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
-			<h1>Category List</h1>
+			<h1>Shop by Categories</h1>
 			<table  class="table table-striped">
-				<tr>
-					<th>Type:</th>
-				</tr>
-				<tr>
-					<th  th:each ="category: ${categories}" ></th>
-					<td th:text="${category.type}"></td>
+				<tr th:each ="category : ${categorys}">
+					<td th:text="${category.type}" ></td>
 				</tr>
 			</table>
 	
