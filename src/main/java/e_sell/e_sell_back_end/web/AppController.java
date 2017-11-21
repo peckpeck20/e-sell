@@ -123,6 +123,13 @@ public class AppController {
 		model.addAttribute("categorys", crepository.findAll());
 		return "categorylist";
 	}
+    //show items by category
+    @RequestMapping(value="/item-by-category/{id}",method= RequestMethod.GET)
+    public String itemByCategory(@PathVariable("id") Long categoryId, Model model){
+    	model.addAttribute("category",crepository.findOne(categoryId));
+		return "/item-by-category";
+    	
+    }
     
 
     
@@ -204,6 +211,9 @@ public class AppController {
     public @ResponseBody Item findItemRest(@PathVariable("id")Long itemid){
     	return irepository.findOne(itemid);
     }
+    
+
+    
     
 
     
