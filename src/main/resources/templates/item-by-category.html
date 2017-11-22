@@ -8,17 +8,34 @@
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
-			<h1 th:text="${category.type}"></h1>
-			<table  class="table table-striped">
-				<tr th:each ="category : ${category}">
-					<td th:text="${category.id}" ></td>				
-				</tr>
-				<tr>
-					<td th:text="${category.items}" ></td>
-					
-				</tr>
-			</table>
+			<h1 th:text="${categorys.type}"></h1> 
+<table  class="table table-striped">
 
+
+			<!-- nested loop doesn't work unless there is [0] -->
+            <th:block th:each ="category : ${categorys}">
+            <tr th:each="item : ${category.items}">
+                <td th:text="${category.id}" ></td>
+                <td th:text="${category.items}" ></td>
+                 
+                <td th:text="${category.items[0].price}" ></td>
+                </tr>               
+            </th:block>
+				
+				
+  <!-- this is what I want as the result, I would like to know how to loop with the TH attribute 
+            <tr>
+
+                <td th:text="${category.items[0].title}"></td>
+                <td th:text="${category.items[0].category.type}"></td>
+                <td th:text="${category.items[0].description}"></td>
+                <td th:text="${category.items[0].status}"></td>
+                <td th:text="${category.items[0].zipcode}"></td>
+                <td th:text="${category.items[0].price}"></td>
+            </tr>
+		-->
+</table>
+ 
 	
 			<!-- Insert footer template -->
 			<div th:replace="template :: footer"></div>

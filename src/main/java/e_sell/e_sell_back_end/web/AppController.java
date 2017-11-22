@@ -125,8 +125,10 @@ public class AppController {
 	}
     //show items by category
     @RequestMapping(value="/item-by-category/{id}",method= RequestMethod.GET)
-    public String itemByCategory(@PathVariable("id") Long categoryId, Model model){
-    	model.addAttribute("category",crepository.findOne(categoryId));
+    public String itemByCategory(@PathVariable("id") Long categoryid, Model model){
+    	//model.addAttribute("items",irepository.findByCategory(categoryid));
+    	model.addAttribute("categorys",crepository.findOne(categoryid));
+    	//model.addAttribute("item",irepository.findByCategory(categoryid));
 		return "/item-by-category";
     	
     }

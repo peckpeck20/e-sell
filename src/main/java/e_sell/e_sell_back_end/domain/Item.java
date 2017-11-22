@@ -141,6 +141,12 @@ private Category category;
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status
+				+ ", zipcode=" + zipcode + ", price=" + price + ", category=" + category + "]";
+	}
 	
 	
 }

@@ -27,7 +27,7 @@ public class Category {
 	
 	// 1 Category can have * Items
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-	private List<Item> item;
+	private List<Item> items;
 	
 
 	//constructor
@@ -56,11 +56,11 @@ public class Category {
 	//getters n setters for relationship
 	
 	public List<Item> getItems() {
-		return item;
+		return items;
 	}
 
 	public void setItems(List<Item> item) {
-		this.item = item;
+		this.items = item;
 	}
 
 

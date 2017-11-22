@@ -40,6 +40,7 @@ public class ESellBackEndApplication {
 				crepository.save(new Category("Clothes"));
 				
 				//insert items
+				//irepository.save(new Item(1,"aa",50.00,"New","test",0002));
 				//irepository.save(new Item("1","like new car with tires","2000.00","used","Mazda 2009","00200"));
 				//irepository.save(new Item("Mazda 2009","like new car with tires","Used","00200","1200.00",1));
 				//show all users
