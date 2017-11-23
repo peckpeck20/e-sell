@@ -40,9 +40,18 @@ public class ESellBackEndApplication {
 				crepository.save(new Category("Clothes"));
 				
 				//insert items
-				//irepository.save(new Item(1,"aa",50.00,"New","test",0002));
-				//irepository.save(new Item("1","like new car with tires","2000.00","used","Mazda 2009","00200"));
-				//irepository.save(new Item("Mazda 2009","like new car with tires","Used","00200","1200.00",1));
+				irepository.save(new Item("mazda 2009","manual transmition 10000km","Used",00200,2000.00, crepository.findOne(4L)));
+				irepository.save(new Item("iPhone 6","latest OS, includes all accesories","Used",00150,999.00,crepository.findOne(2L)));
+				irepository.save(new Item("Blender","brand new, never opened","New",00135,20.00,crepository.findOne(1L)));
+				irepository.save(new Item("Samsung 8","Fresh from the factory, 3 year warranty","Refurbished",00200,400.00,crepository.findOne(2L)));
+				irepository.save(new Item("T-shirt","White Polo","New",00124,4.99,crepository.findOne(5L)));
+				irepository.save(new Item("Timberland Boots","Size 9","New",00200,100.00,crepository.findOne(5L)));
+				irepository.save(new Item("Lenovo x240","Latest ultrabook - i7 quad core processor","Refurbished",00100,499.99,crepository.findOne(2L)));
+				irepository.save(new Item("Car wash","make your car fresh and clean now!","New",00200,40.00, crepository.findOne(3L)));
+				irepository.save(new Item("Computer repair","Do you have a broken computer? no problem. Call us now ","New",00200,100.00, crepository.findOne(3L)));
+				irepository.save(new Item("Washing machine","Brand:Samsung still in box","Refurbished",00500,500.00, crepository.findOne(1L)));				
+				
+				
 				//show all users
 				log.info("SHOWING ALL USERS");
 				log.info("-------------------------------");
@@ -62,13 +71,7 @@ public class ESellBackEndApplication {
 				for (User user : urepository.findByLastName("Zapata")) {
 					log.info(user.toString());
 				}
-				
-				//find Services category
-				log.info("SHOW SERVICES CATEGORY");
-				log.info("-------------------------------");
-				for (Category category : crepository.findByType("Services")){
-					log.info(category.toString());
-				}
+
 			
 			};
 	

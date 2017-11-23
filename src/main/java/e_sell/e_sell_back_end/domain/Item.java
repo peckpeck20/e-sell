@@ -74,10 +74,10 @@ private Category category;
 	
 	}
 
-	public Item(Long id, String title, String description, String status, Integer zipcode, Double price,
+	public Item( String title, String description, String status, Integer zipcode, Double price,
 			Category category) {
 		super();
-		this.id = id;
+
 		this.title = title;
 		this.description = description;
 		this.status = status;

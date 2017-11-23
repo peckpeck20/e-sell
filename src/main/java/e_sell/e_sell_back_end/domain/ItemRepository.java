@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 public interface ItemRepository extends CrudRepository<Item, Long> {
 	List<Item> findByTitle(String title);
 	
-	List<Item> findByCategory(Long categoryid);
+	List<Item> findByCategory(Category categoryid);
 
 }
