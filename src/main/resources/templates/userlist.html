@@ -10,18 +10,20 @@
 			<div th:replace="template :: navBar"></div>
 			<h1>All users </h1>
 
-			<table class="table table-striped">
-			  <tr>
-			    <th>First Name </th>
-			    <th>Last Name </th> 
-			    <th>E-Mail </th>
-			    <th>Username</th>
-			    <th>Password </th>
-			    <th>Role </th>
-			    <th></th>
-			    <th></th>
-			  </tr>
-			  
+			<table class="table table-striped table-hover">
+				<thead class="thead-inverse">
+					  <tr>
+					    <th>First Name </th>
+					    <th>Last Name </th> 
+					    <th>E-Mail </th>
+					    <th>Username</th>
+					    <th>Password </th>
+					    <th>Role </th>
+					    <th></th>
+					    <th></th>
+					  </tr>
+				  </thead>
+			  	<tbody>
 			  <tr th:each = "user: ${users}">
 			    <td th:text="${user.firstName}"></td>
 			    <td th:text="${user.lastName}"></td>
@@ -33,7 +35,7 @@
 			    <!-- only admin account can delete user -->
 			    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete_user{id}(id=${user.id})}">Delete</a></td>
 			  </tr>
-			  
+			  </tbody>
 			</table>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<a  class="btn btn-success" th:href="@{/sign_up}">Add a User</a>

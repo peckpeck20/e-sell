@@ -9,10 +9,9 @@
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
 			<h1>Shop by Categories</h1>
-			<table  class="table table-striped">
+			<table  class="table table-striped ">
 				<tr th:each ="category : ${categorys}">
-					<td th:text="${category.type}" ></td>
-					<td><a th:href="@{/item-by-category/{id}(id=${category.id})}">click me!</a></td>
+					<td><a class="btn btn-info btn-lg btn-block" th:href="@{/item-by-category/{id}(id=${category.id})}" th:text="${category.type}" >click me!</a></td>
 				</tr>
 			</table>
 	

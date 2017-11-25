@@ -32,8 +32,8 @@
             <li>
               <a href="#" th:href="@{/itemlist}">Posts</a>
             </li>
-            <li>
-              <a href="#" th:href="@{/userlist}">Users</a>
+            <li sec:authorize="hasRole('ADMIN')">
+              <a  href="#" th:href="@{/userlist}">Users</a>
             </li>
              <li>
               <a href="#" th:href="@{/categorylist}">Categories</a>
@@ -46,7 +46,7 @@
           		<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Sign In</a>
             </li>
             <li>
-            	<form th:action="@{/logout}" method="post" class="btn-logout">
+            	<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="btn-logout">
 					<input type="submit" value="Sign Out" class="btn btn-danger"/>
 				</form>
             </li>

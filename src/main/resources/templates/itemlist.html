@@ -11,7 +11,7 @@
 			<!-- takes username and posts it as greeting if its authentificated -->
 			<h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! </h1>
 			<!--<h1>All Items </h1> -->
-			<table class="table table-striped">
+			<table class="table table-striped table-hover">
 			  <tr>
 			    <th>Title </th>
 			    <th>Category </th>

@@ -11,5 +11,20 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 	List<Item> findByTitle(String title);
 	
 	List<Item> findByCategory(Category categoryid);
-
+	
+	List<Item>findAllByOrderByPriceAsc();
+	
+	List<Item>findAllByOrderByPriceDesc();
+	
+	List<Item>findAllByOrderByTitleAsc();
+	
+	List<Item>findAllByOrderByTitleDesc();
+	
+	List<Item>findAllByOrderByZipcodeAsc();
+	
+	List<Item>findAllByOrderByZipcodeDesc();
+	
+	List<Item>findAllByOrderByCategoryAsc();
+	
+	List<Item>findAllByOrderByCategoryDesc();
 }

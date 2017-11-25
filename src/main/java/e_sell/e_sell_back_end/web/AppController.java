@@ -37,10 +37,9 @@ public class AppController {
 	private CategoryRepository crepository;
 	
     //login redirects root and login path
-
-    @RequestMapping(value={"/"})
+    @RequestMapping(value={"/"},method=RequestMethod.GET)
     public String rootDefault() {	
-        return "itemlist";
+        return "redirect:itemlist";
     }
     
     @RequestMapping(value={"/login"})
@@ -113,7 +112,7 @@ public class AppController {
     @RequestMapping(value ="/itemlist")
     public String itemList(Model model) {
     	//add all items to Model
-        model.addAttribute("items", irepository.findAll());
+        model.addAttribute("items", irepository.findAllByOrderByTitleAsc());
         return "itemlist";
     }
     
@@ -129,10 +128,8 @@ public class AppController {
     	model.addAttribute("items",irepository.findByCategory(categoryid));
     	return "/itemlist";  	
     }
-    
-
-    
-    //delete a user
+        
+    //delete a user - admin
     //in value we take the ID
     @RequestMapping(value="/delete_user{id}",method = RequestMethod.GET)
     //@PathVariable indicates that a method parameter should be bound to a URL template variable
@@ -141,7 +138,7 @@ public class AppController {
     	return "redirect:userlist";	
     }
     
-    //Edit user
+    //Edit user - admin
     @RequestMapping(value="/edit_user/{id}")
     public String editBook(@PathVariable("id") Long userId,Model model){
     	model.addAttribute("user",urepository.findOne(userId));
@@ -170,8 +167,8 @@ public class AppController {
         irepository.save(item);
     	return "redirect:/itemlist";
     }
-    //delete item
-    @RequestMapping(value="/delete_item/{id}",method=RequestMethod.GET)
+    //delete item - admin
+    @RequestMapping(value="/admin/delete_item/{id}",method=RequestMethod.GET)
     public String deleteItem(@PathVariable("id") Long itemId,Model model){
        	irepository.delete(itemId);
 		return "redirect:/itemlist";

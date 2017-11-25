@@ -28,7 +28,8 @@ public class ESellBackEndApplication {
 		public CommandLineRunner demo(UserRepository urepository, CategoryRepository crepository, ItemRepository irepository) {
 			return (args) -> {
 				//create users
-				urepository.save(new User("Jose","Zapata","jose@zapata.com","peckpeck","1234567","ADMIN"));
+				/*
+				urepository.save(new User("Jose","Zapata","jose@zapata.com","peckT","1234567","ADMIN"));
 				urepository.save(new User("Teddy","Bear","teddy@bear.com","tedy200","12345678","USER"));
 				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","yuka2017","12345678","USER"));
 				
@@ -71,8 +72,7 @@ public class ESellBackEndApplication {
 				for (User user : urepository.findByLastName("Zapata")) {
 					log.info(user.toString());
 				}
-
-			
+*/			
 			};
 	
 		}
