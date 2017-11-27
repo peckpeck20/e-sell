@@ -7,16 +7,23 @@ body {
 	padding-bottom: 20px;
 }
 /*Fixes sign out button on nav bar */
-.btn-logout {
+.btn-bar {
   padding:10px;
   margin-right:27px;
 }
-/*fix logo */
 
+/*Add shadow effect */
+.navbar{
+	-webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+/*fix logo */
 .navbar-brand {
   display: flex;
   align-items: center;
 }
+
 .navbar-brand>img {
 
 	padding-right:5px;
@@ -24,4 +31,10 @@ body {
     width: auto;
     max-height: 52px;
     max-width: 150px;
+}
+.bg-company-red {
+    background-color: black;
+}
+  .navbar-toggle, .icon-bar {
+    border:1px solid red;
 }

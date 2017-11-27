@@ -10,7 +10,39 @@
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
 			<h1>Sign up Form </h1>
-			<form th:replace="template :: userForm(action='/sign_up')"></form>
+<form action="#" th:action="@{/sign_up}" th:object="${signupform}" method="post" th:fragment="signupform">
+	<div class="form-group">
+		<label for="firstName">First Name:</label>
+		<input type="text" class="form-control" id="firstName" autofocus="autofocus" placeholder="Enter your first Name" th:field="*{firstName}" />
+		<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Error</div>
+	</div>
+	<div class="form-group">
+		<label for="lastName">Last Name:</label>
+		<input type="text" class="form-control" id="lastName" placeholder="Enter your last Name" th:field="*{lastName}" />
+		<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error</div>
+	</div>
+	<div class="form-group">
+		<label for="email">E-Mail:</label>
+		<input type="email" class="form-control" id="email" placeholder="email@you.com" aria-describedby="emailHelp" th:field="*{email}" />
+		<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
+	</div>
+		<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" placeholder="Enter your username " th:field="*{username}" />
+		<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</div>
+	</div>
+			<div>
+				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
+			</div>
+			<div>
+				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
+			</div>
+	<input type="hidden" class="form-control" id="role"  th:field="*{role}"  th:value="USER" />
+	<p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
+</form>
 			  
 
 		    <!-- Insert footer template -->

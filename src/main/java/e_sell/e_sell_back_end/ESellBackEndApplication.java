@@ -1,5 +1,7 @@
 package e_sell.e_sell_back_end;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -72,8 +74,15 @@ public class ESellBackEndApplication {
 				for (User user : urepository.findByLastName("Zapata")) {
 					log.info(user.toString());
 				}
-*/			
-			};
+		//irepository.save(new Item("broken honda 1999","manual transmition 2131230km","Used",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
+				//irepository.save(new Item("new honda 2009","manual transmition 0km","NEW",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
+			
+				log.info("-------------------------------");
+				log.info("-----------Show items users-------------------");
+				Item item = irepository.findByUser(1L);
+				log.info(item.toString());
+				*/		
+				};
 	
 		}
 }

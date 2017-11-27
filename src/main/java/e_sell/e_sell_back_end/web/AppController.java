@@ -5,10 +5,12 @@ package e_sell.e_sell_back_end.web;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,22 +60,43 @@ public class AppController {
 	//1.create an empty form object and add to model
 	@GetMapping("/sign_up")
 	public String signUpForm(Model model){
-		
-		model.addAttribute("user", new User());
+		model.addAttribute("signupform", new SignupForm());
 		return "sign_up";
 	}
 	
 	//2.post filled form from user to the model object created in step 1 once validated
 	@PostMapping("/sign_up")
-	public String signUpSubmit(@Valid User user,BindingResult bindingResult,Model model){
-		if (bindingResult.hasErrors()){
-			//if the form has errors return Error
-			return "sign_up";
-		}
-		//if its correct proceed to add user to model
-		
-		urepository.save(user);
-		return "redirect:/add_item";
+	public String submitForm(@Valid @ModelAttribute("signupform") SignupForm signupform,BindingResult bindingResult){
+		if (!bindingResult.hasErrors()) { // validation errors
+    		if (signupform.getPassword().equals(signupform.getPasswordCheck())) { // check password match		
+	    		String pwd = signupform.getPassword();
+		    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+		    	String hashPwd = bc.encode(pwd);
+	
+		    	User newUser = new User();
+		    	newUser.setFirstName(signupform.getFirstName());
+		    	newUser.setLastName(signupform.getLastName());
+		    	newUser.setEmail(signupform.getEmail());
+		    	newUser.setUsername(signupform.getUsername());
+		    	newUser.setPassword(hashPwd);
+		    	newUser.setRole("USER");
+		    	if (urepository.findByUsername(signupform.getUsername()) == null) { // Check if user exists
+		    		urepository.save(newUser);
+		    	}
+		    	else {
+	    			bindingResult.rejectValue("username", "err.username", "Username already exists");    	
+	    			return "sign_up";		    		
+		    	}
+    		}
+    		else {
+    			bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match");    	
+    			return "sign_up";
+    		}
+    	}
+    	else {
+    		return "sign_up";
+    	}
+    	return "redirect:/login";    	   
 	}
 	
 	//list all user
@@ -112,7 +135,7 @@ public class AppController {
     @RequestMapping(value ="/itemlist")
     public String itemList(Model model) {
     	//add all items to Model
-        model.addAttribute("items", irepository.findAllByOrderByTitleAsc());
+        model.addAttribute("items", irepository.findAllByOrderByPriceAsc());
         return "itemlist";
     }
     
@@ -128,6 +151,8 @@ public class AppController {
     	model.addAttribute("items",irepository.findByCategory(categoryid));
     	return "/itemlist";  	
     }
+    
+
         
     //delete a user - admin
     //in value we take the ID
@@ -139,7 +164,7 @@ public class AppController {
     }
     
     //Edit user - admin
-    @RequestMapping(value="/edit_user/{id}")
+    @RequestMapping(value="/edit_user/{id}",method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long userId,Model model){
     	model.addAttribute("user",urepository.findOne(userId));
     	return "edit_user";
@@ -147,6 +172,11 @@ public class AppController {
     //save edited user
     @RequestMapping(value = "save_user", method = RequestMethod.POST)
     public String saveUser(User user){
+    	//encrypt password
+    	String pwd = user.getPassword();
+    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+    	String hashPwd = bc.encode(pwd);
+    	user.setPassword(hashPwd);
         urepository.save(user);
     	return "redirect:/userlist";
     }
@@ -154,7 +184,7 @@ public class AppController {
     
     
     //edit item
-    @RequestMapping(value="/edit_item/{id}")
+    @RequestMapping(value="/edit_item/{id}",method = RequestMethod.GET)
     public String editItem(@PathVariable("id") Long itemId,Model model){
     	model.addAttribute("item",irepository.findOne(itemId));
     	model.addAttribute("categorys",crepository.findAll());
@@ -168,7 +198,7 @@ public class AppController {
     	return "redirect:/itemlist";
     }
     //delete item - admin
-    @RequestMapping(value="/admin/delete_item/{id}",method=RequestMethod.GET)
+    @RequestMapping(value="/delete_item/{id}",method = RequestMethod.GET)
     public String deleteItem(@PathVariable("id") Long itemId,Model model){
        	irepository.delete(itemId);
 		return "redirect:/itemlist";

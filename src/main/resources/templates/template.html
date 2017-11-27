@@ -14,7 +14,7 @@
 	</head>
 
 <!--  bav var fragment -->	
-	<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navBar">
+	<nav class="navbar navbar-inverse navbar-fixed-top bg-company-red" th:fragment="navBar">
 		<!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -32,21 +32,32 @@
             <li>
               <a href="#" th:href="@{/itemlist}">Posts</a>
             </li>
-            <li sec:authorize="hasRole('ADMIN')">
-              <a  href="#" th:href="@{/userlist}">Users</a>
-            </li>
              <li>
               <a href="#" th:href="@{/categorylist}">Categories</a>
             </li>
+            <li sec:authorize="hasRole('ADMIN')" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Tools <b class="caret"></b></a>
+            	<ul class="dropdown-menu">
+            		<li>
+            			<a  href="#" th:href="@{/userlist}"> Manage Users</a>
+            		</li>
+            		<li>
+            			<a  href="#" th:href="@{/categorylist}"> Manage Categories</a>
+            		</li>
+            		<li>
+            			<a  href="#" th:href="@{/itemlist}"> Manage Items</a>
+            		</li>
+            	</ul>
+            </li>
+
             </ul>
             
              <ul class="nav navbar-nav navbar-right">
           	<li>
           		<!-- Only shown if user isn't logged in -->
-          		<a sec:authorize="!isAuthenticated()" th:href="@{/login}">Sign In</a>
+          		<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn-bar">Sign In</a>
             </li>
             <li>
-            	<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="btn-logout">
+            	<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="btn-bar">
 					<input type="submit" value="Sign Out" class="btn btn-danger"/>
 				</form>
             </li>
@@ -116,7 +127,7 @@
     <p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
 </form>
 
-<!-- user form - action is defined on each call of this fragment -->
+<!-- user edit - action is defined on each call of this fragment -->
 <form action="#" th:action="@{${action}}" th:object="${user}" method="post" th:fragment="userForm">
 	<div class="form-group">
 		<label for="firstName">First Name:</label>
@@ -148,5 +159,6 @@
 	<input type="hidden" class="form-control" id="role"  th:field="*{role}"  th:value="USER" />
 	<p><input type="submit" value="Submit" class="btn btn-primary" /> <input type="reset" value="Reset" class="btn btn-basic" /></p>
 </form>
+
 
 </html>

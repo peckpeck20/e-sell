@@ -15,6 +15,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	List<User> findByfirstName(String firstName);
 	
+
 	List<User> findByFirstNameAndLastName(String firstName, String lastName);
 	
 	// Enable ignore case

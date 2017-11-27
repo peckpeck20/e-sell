@@ -27,4 +27,5 @@ public interface ItemRepository extends CrudRepository<Item, Long> {
 	List<Item>findAllByOrderByCategoryAsc();
 	
 	List<Item>findAllByOrderByCategoryDesc();
+	
 }

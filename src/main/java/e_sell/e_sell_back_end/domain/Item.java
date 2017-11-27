@@ -49,21 +49,25 @@ public class Item {
 	@Column(name="price")
 	private Double price;
 	
-	//create relationship or * to 1 between items to user
-	/*
+
+	//many items can be 1 user *..1
 	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name = "userid")
+	@JoinColumn(name="userid")
 	private User user;
-	*/
 	
-	//Many items can have 1 category * to 1
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+
+	
+	//Many items can have 1 category *..1
 	@ManyToOne
-    /*entity relationship will
-    cause endless loop (First item is serialized and it contains
-    category which is then serialized which contains students which
-    are then serialized
-    */
     @JsonIgnore
 	@JoinColumn(name = "categoryid")
 private Category category;
@@ -83,6 +87,20 @@ private Category category;
 		this.status = status;
 		this.zipcode = zipcode;
 		this.price = price;
+		this.category = category;
+	}
+
+	
+	
+	public Item(String title, String description, String status, Integer zipcode, Double price, Category category,
+			User user) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.status = status;
+		this.zipcode = zipcode;
+		this.price = price;
+		this.user = user;
 		this.category = category;
 	}
 
@@ -145,8 +163,10 @@ private Category category;
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status
-				+ ", zipcode=" + zipcode + ", price=" + price + ", category=" + category + "]";
+				+ ", zipcode=" + zipcode + ", price=" + price + ", user=" + user + ", category=" + category + "]";
 	}
+
+
 	
 	
 }

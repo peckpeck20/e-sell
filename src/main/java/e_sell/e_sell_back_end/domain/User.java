@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,12 +17,26 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="user")
 public class User {
+	
+	//one user can have 0..* items
+	@OneToMany(cascade= CascadeType.ALL,mappedBy ="user")
+	private List<Item>items;
+	
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
 	//generated ID column 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "userid",nullable=false,updatable=false)
 	private long id;
 	
+
 	@NotNull
 	@Column(name="firstname")
 	@Size(min=2,max=30)
@@ -49,6 +64,12 @@ public class User {
 	@Column(name="role",nullable=false)
 	//set default role of USER
 	private String role ="USER";
+	
+
+	
+	public User( ){
+		
+	};
 
 	public User(String firstName, String lastName, String email, String username, String password, String role) {
 		super();
@@ -60,9 +81,8 @@ public class User {
 		this.role = role;
 	}
 	
-	public User( ){
-		
-	};
+	
+
 
 	public long getId() {
 		return id;
@@ -122,24 +142,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", username=" + username + ", password=" + password + ", role=" + role + "]";
+		return "User [items=" + items + ", id=" + id + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
-	
-	/*
-	// relationship one user to * items
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-			private List<Item>items;
-	
-//setters n getters for relationship
-	public List<Item> getItems() {
-		return items;
-	}
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-	
-	*/
+
+
 
 	
 	
