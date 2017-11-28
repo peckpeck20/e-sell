@@ -151,7 +151,35 @@ public class AppController {
     	model.addAttribute("items",irepository.findByCategory(categoryid));
     	return "/itemlist";  	
     }
+  //show items by user
+    @RequestMapping(value="/user-posts/{id}",method= RequestMethod.GET)
+    public String showPosts(@PathVariable("id") User userId, Model model){
+    	model.addAttribute("items",irepository.findByUser(userId));
+    	return "/itemlist";  	
+    }
     
+    //edit category
+    @RequestMapping(value="/edit_category/{id}",method = RequestMethod.GET)
+    //@PathVariable indicates that a method parameter should be bound to a URL template variable
+    public String editCategory(@PathVariable("id")Long categoryId,Model model){
+		model.addAttribute(crepository.findOne(categoryId));	
+    	return "edit-category";	
+    }
+    //save edited category
+    @RequestMapping(value = "/save_category", method = RequestMethod.POST)
+    public String saveCat(Category category){
+        crepository.save(category);
+    	return "redirect:/categorylist";
+    }
+    
+    
+    //delete category
+    @RequestMapping(value="/delete_category/{id}",method = RequestMethod.GET)
+    //@PathVariable indicates that a method parameter should be bound to a URL template variable
+    public String deleteCategory(@PathVariable("id")Long categoryId,Model model){
+		crepository.delete(categoryId);
+    	return "redirect:/categorylist";	
+    }
 
         
     //delete a user - admin
@@ -169,6 +197,7 @@ public class AppController {
     	model.addAttribute("user",urepository.findOne(userId));
     	return "edit_user";
     }
+    
     //save edited user
     @RequestMapping(value = "save_user", method = RequestMethod.POST)
     public String saveUser(User user){
@@ -180,8 +209,6 @@ public class AppController {
         urepository.save(user);
     	return "redirect:/userlist";
     }
-    
-    
     
     //edit item
     @RequestMapping(value="/edit_item/{id}",method = RequestMethod.GET)
@@ -214,7 +241,6 @@ public class AppController {
     	return (List<Item>) irepository.findAll();
     }
 	
-
 	@RequestMapping(value = "/categories" ,method = RequestMethod.GET)
     public @ResponseBody List<Category> categoryListRest(){
     	return (List<Category>) crepository.findAll();

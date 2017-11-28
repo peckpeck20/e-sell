@@ -1,6 +1,6 @@
 package e_sell.e_sell_back_end;
 
-import java.util.List;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import e_sell.e_sell_back_end.domain.Category;
+
 import e_sell.e_sell_back_end.domain.CategoryRepository;
-import e_sell.e_sell_back_end.domain.Item;
+
 import e_sell.e_sell_back_end.domain.ItemRepository;
-import e_sell.e_sell_back_end.domain.User;
+
 import e_sell.e_sell_back_end.domain.UserRepository;
 
 
@@ -41,6 +41,7 @@ public class ESellBackEndApplication {
 				crepository.save(new Category("Services"));
 				crepository.save(new Category("Vehicles"));
 				crepository.save(new Category("Clothes"));
+				
 				
 				//insert items
 				irepository.save(new Item("mazda 2009","manual transmition 10000km","Used",00200,2000.00, crepository.findOne(4L)));
@@ -81,7 +82,10 @@ public class ESellBackEndApplication {
 				log.info("-----------Show items users-------------------");
 				Item item = irepository.findByUser(1L);
 				log.info(item.toString());
-				*/		
+				*/
+				//crepository.save(new Category("Test"));
+				//crepository.delete(6L);
+				
 				};
 	
 		}

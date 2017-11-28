@@ -19,6 +19,7 @@
 					    <th>Username</th>
 					    <th>Password </th>
 					    <th>Role </th>
+					    <th>Admin actions</th>
 					    <th></th>
 					    <th></th>
 					  </tr>
@@ -31,6 +32,7 @@
 			    <td th:text="${user.username}"></td>
 			    <td th:text="${user.password}"></td>
 			    <td th:text="${user.role}"></td>
+			    <td><a class="btn btn-info" th:href="@{/user-posts/{id}(id=${user.id})}">Show Items</a></td>
 			    <td><a class="btn btn-warning" th:href="@{/edit_user/{id}(id=${user.id})}">Edit</a></td>
 			    <!-- only admin account can delete user -->
 			    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete_user{id}(id=${user.id})}">Delete</a></td>

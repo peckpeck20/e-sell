@@ -8,10 +8,13 @@
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
-			<h1>Shop by Categories</h1>
+			<h1 sec:authorize="hasRole('USER')">Shop by Categories</h1>
+			<h1 sec:authorize="hasRole('ADMIN')">Manage Categories</h1>
 			<table  class="table table-striped ">
 				<tr th:each ="category : ${categorys}">
 					<td><a class="btn btn-info btn-lg btn-block" th:href="@{/item-by-category/{id}(id=${category.id})}" th:text="${category.type}" >click me!</a></td>
+					<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-warning" th:href="@{/edit_category/{id}(id=${category.id})}" >Edit</a></td>
+					<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"  th:href="@{/delete_category/{id}(id=${category.id})}">delete</a></td>
 				</tr>
 			</table>
 	

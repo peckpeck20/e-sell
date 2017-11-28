@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- Insert Header sources from template -->
+	<head th:replace="template :: sources">
+		<title  id="pageTitle">Edit Categories</title>
+	</head>
+	<body>
+   		<div class="container-fluid">
+   			<!-- insert navBar from template -->
+			<div th:replace="template :: navBar"></div>
+			<h1>Edit Category</h1>
+			<!-- .. needed to edit user not to create  -->
+		    <form action="#" th:action="@{../save_category}" th:object="${category}" method="post">
+			    <!-- ID attribute is loaded and hidden from view so we can edit the selected ID and not create a new one -->
+			    <input type="hidden" th:field="*{id}" class="form-control"/>
+			    <div class="form-group">
+			    	<label for="type">Category Type:</label>
+			    	<input type="text" class="form-control" id="type" autofocus="autofocus" placeholder="edit category name" th:field="*{type}" />
+			    	<div th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Error</div>
+			    </div>
+		        <p>
+		        <input type="submit" value="Submit" class="btn btn-primary" />
+		        <input type="reset" value="Reset" class="btn btn-basic" /> 
+		        </p> 
+		    </form>
+		     <a class="btn btn-info" th:href="@{/categorylist}">Back to all Categories</a>
+		    <!-- Insert footer template -->
+		    <div th:replace="template :: footer"></div>
+		</div>	
+	</body>
+</html>

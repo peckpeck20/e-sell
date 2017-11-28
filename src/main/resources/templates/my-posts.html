@@ -2,15 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<!-- Insert Header sources from template -->
 	<head th:replace="template :: sources">
-		<title  id="pageTitle">Items listed</title>
+		<title  id="pageTitle">My Posts</title>
 	</head>
 	<body>
 		<div class="container-fluid">
 			<!-- insert navBar from template -->
 			<div th:replace="template :: navBar"></div>
 			<!-- takes username and posts it as greeting if its authentificated -->
-			<h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! </h1>
-			<!--<h1>All Items </h1> -->
+			<h1 sec:authorize="isAuthenticated()" th:inline="text">[[${#httpServletRequest.remoteUser}]]'s Posts </h1>
 			<table class="table table-striped table-hover">
 			  <tr>
 			    <th>Title </th>

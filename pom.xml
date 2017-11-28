@@ -65,19 +65,21 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<version>2.1.2.RELEASE</version>
+			<version>2.1.2.RELEASE</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
-		<!-- Database connection 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		-->
+		<!-- DB connection MariaDB -->
 		<dependency>
 		    <groupId>org.mariadb.jdbc</groupId>
 		    <artifactId>mariadb-java-client</artifactId>
-		    <version>2.1.0</version>
+		    <version>2.1.0</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
+		<!-- FB -->
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-facebook</artifactId>
+		</dependency>
+
+		
 	</dependencies>
 
 	<build>
