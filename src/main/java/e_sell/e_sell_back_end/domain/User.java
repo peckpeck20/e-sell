@@ -36,17 +36,17 @@ public class User {
 	private long id;
 	
 
-	@NotNull
+	//@NotNull
 	@Column(name="firstname")
 	@Size(min=2,max=30)
 	private String firstName;
 	
-	@NotNull
+	//@NotNull
 	@Size(min=2,max=30)
 	@Column(name="lastname")
 	private String lastName;
 	
-	@NotNull
+	//@NotNull
 	@Size(min=2,max=50)
 	@Column(name="email")
 	private String email;

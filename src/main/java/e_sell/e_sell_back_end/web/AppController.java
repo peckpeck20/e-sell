@@ -48,6 +48,11 @@ public class AppController {
     public String loginReq() {	
         return "login";
     }
+    //fb 
+    @RequestMapping(value={"/signin"})
+    public String signIn() {	
+        return "signin";
+    }
     
 
 	//for testing purposes

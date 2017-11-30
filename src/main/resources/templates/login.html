@@ -26,13 +26,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 		            </div>           
 		            <div><input class="btn btn-primary btn-lg" type="submit" value="Sign In"/></div>
 		        </form>
-		        <!--  
-				<form action="/signin/facebook" method="POST">
-				    <input type="hidden" name="scope" value="public_profile" />
-				    <input type="submit" value="Login using Facebook"/>
-				</form>
-				
-				-->
 		        <a  th:href="@{/sign_up}" class="btn btn-info">Sign Up</a>
 			<div th:replace="template :: footer"></div>
 		</div>

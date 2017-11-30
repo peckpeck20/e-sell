@@ -45,7 +45,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 		.csrf().disable()
 		.authorizeRequests()
 	//pages made public
-	.antMatchers("/api/**", "/itemlist","/categorylist/**","/item-by-category/**","/sign_up","/css/**", "/js/**","/","/img/**","/categories","/items").permitAll()
+	.antMatchers("/api/**", "/itemlist","/categorylist/**","/item-by-category/**","/sign_up","/css/**", "/js/**","/","/img/**","/categories","/items","/signin/**").permitAll()
 	.antMatchers("/admin/**").hasRole("ADMIN")
 	.anyRequest().authenticated()
 	.and()

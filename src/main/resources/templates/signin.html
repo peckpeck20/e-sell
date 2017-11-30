@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!-- Insert Header sources from template -->
+<head th:replace="template :: sources">
+	<title  id="pageTitle">Sign in to E-Sell</title>
+</head>
+	<body>
+		<div class="container-fluid text-center">
+			<!-- insert navBar from template -->
+			<div th:replace="template :: navBar"></div>
+			<h1>Login to E-Sell</h1>
+			<!--takes the URL parameter and matches it according to the request -->
+			<div th:if="${param.error}">
+				Invalid credentials
+			</div>
+			<div th:if="${param.logout}">
+				Logged out successfully
+			</div>
+			    <form action="/signin/facebook" method="POST">
+				    <input type="hidden" name="scope" value="public_profile" />
+				    <input type="submit" value="Login using Facebook"/>
+				</form>
+		</div>
+	</body>
+</html>
+

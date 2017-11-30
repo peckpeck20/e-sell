@@ -20,6 +20,7 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
         System.out.println("signup === FB ");
         final User user = new User();
         user.setUsername(connection.getDisplayName());
+        
         String pwd =connection.getProfileUrl();
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         String hashPwd = bc.encode(pwd);
