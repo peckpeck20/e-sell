@@ -38,3 +38,14 @@ body {
   .navbar-toggle, .icon-bar {
     border:1px solid red;
 }
+
+.table {
+    border-radius: 5px;
+    width: 90%;
+    margin: 0px auto;
+    float: none;
+}
+
+.boldTr {
+	font-weight:bold;
+}

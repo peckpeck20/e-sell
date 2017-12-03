@@ -17,7 +17,15 @@
 					<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"  th:href="@{/delete_category/{id}(id=${category.id})}">delete</a></td>
 				</tr>
 			</table>
-	
+			<!-- Add category -->	
+			<form sec:authorize="hasRole('ADMIN')" method="post" th:action="@{../save_category}" th:object="${category}">
+				<div class="form-group">
+		    	<label for="addCategory">Add Category:</label>
+		    	<input type="text" class="form-control" id="addCategory" autofocus="autofocus" placeholder="Enter new Category"></input>
+		    	</div>
+		    	<input type="submit" value="Submit" class="btn btn-primary" />
+		    	<input type="reset" value="Reset" class="btn btn-basic" />
+			</form>
 			<!-- Insert footer template -->
 			<div th:replace="template :: footer"></div>
 		</div>

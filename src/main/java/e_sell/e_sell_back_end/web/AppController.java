@@ -170,11 +170,18 @@ public class AppController {
 		model.addAttribute(crepository.findOne(categoryId));	
     	return "edit-category";	
     }
-    //save edited category
+    //save category
     @RequestMapping(value = "/save_category", method = RequestMethod.POST)
     public String saveCat(Category category){
         crepository.save(category);
     	return "redirect:/categorylist";
+    }
+    
+    //create new category
+    @RequestMapping(value = "/save_category", method = RequestMethod.GET)
+    public String createCat(Category category,Model model){
+        model.addAttribute("category", new Category());
+    	return "/save_category";
     }
     
     

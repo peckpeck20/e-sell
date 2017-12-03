@@ -12,15 +12,7 @@
 <table  class="table table-striped">
 
 
-			<!-- nested loop doesn't work unless there is [0] -->
-            <th:block th:each ="category : ${categorys}">
-            <tr th:each="item : ${category.items}">
-                <td th:text="${category.id}" ></td>
-                <td th:text="${category.items}" ></td>
-                 
-                <td th:text="${category.items[0].price}" ></td>
-                </tr>               
-            </th:block>
+
 				
 				
   <!-- this is what I want as the result, I would like to know how to loop with the TH attribute 

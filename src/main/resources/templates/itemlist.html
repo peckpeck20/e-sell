@@ -12,29 +12,18 @@
 			<h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! </h1>
 			<!--<h1>All Items </h1> -->
 			<table class="table table-striped table-hover table-responsive">
-			  <tr>
-			    <th>Title </th>
-			    <th>Category </th>
-			    <th>Description </th> 
-			    <th>Condition </th>
-			    <th>Zipcode </th>
-			    <th>Price </th>
-			    <th>Posted by</th>
-			    <th></th>
-				<th></th>
-		
-			  </tr>
-			  <tr th:each ="item: ${items}">
-			    <td th:text="${item.title}"></td>
-			    <td th:text="${item.category.type}"></td>
-			    <td th:text="${item.description}"></td>
-			    <td th:text="${item.status}"></td>
-			    <td th:text="${item.zipcode}"></td>
-			    <td th:text="${item.price}"></td>
-			    
-			    <td></td>
-			   <!--   <td th:text="${item.user}"></td>-->
-			    <td><a class="btn btn-warning" sec:authorize="hasRole('ADMIN')" th:href="@{/edit_item/{id}(id=${item.id})}">Edit</a></td>
+
+			  	<tr th:each ="item: ${items}">
+			   	<tr class="boldTr"><th>Title </th><td th:text="${item.title}"></td></tr> 
+			    <tr><th>Category </th><td th:text="${item.category.type}"></td></tr>
+			    <tr><th>Description </th> <td th:text="${item.description}"></td></tr>
+			    <tr><th>Condition </th><td th:text="${item.status}"></td></tr>
+			    <tr><th>Zipcode </th><td th:text="${item.zipcode}"></td></tr>
+			    <tr><th>Price</th><td th:text="${item.price}"></td></tr>
+			        
+
+			
+			    <td><a class="btn btn-warning center" sec:authorize="hasRole('ADMIN')" th:href="@{/edit_item/{id}(id=${item.id})}">Edit</a></td>
 			     <!-- only admin account can delete user -->
 			    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete_item/{id}(id=${item.id})}">Delete</a></td>
 		
