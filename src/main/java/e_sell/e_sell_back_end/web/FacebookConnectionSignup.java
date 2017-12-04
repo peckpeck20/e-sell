@@ -25,6 +25,8 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
         BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
         String hashPwd = bc.encode(pwd);
         
+        System.out.println("PASSWORD" + pwd.toString());
+        
         user.setPassword(hashPwd);
         userRepository.save(user);
         return user.getUsername();

@@ -9,11 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-
+import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
-
+import e_sell.e_sell_back_end.domain.Item;
 import e_sell.e_sell_back_end.domain.ItemRepository;
-
+import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
 
 
@@ -29,8 +29,10 @@ public class ESellBackEndApplication {
 		@Bean
 		public CommandLineRunner demo(UserRepository urepository, CategoryRepository crepository, ItemRepository irepository) {
 			return (args) -> {
-				//create users
+				
 				/*
+				//create users
+				
 				urepository.save(new User("Jose","Zapata","jose@zapata.com","peckT","1234567","ADMIN"));
 				urepository.save(new User("Teddy","Bear","teddy@bear.com","tedy200","12345678","USER"));
 				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","yuka2017","12345678","USER"));
@@ -54,7 +56,8 @@ public class ESellBackEndApplication {
 				irepository.save(new Item("Car wash","make your car fresh and clean now!","New",00200,40.00, crepository.findOne(3L)));
 				irepository.save(new Item("Computer repair","Do you have a broken computer? no problem. Call us now ","New",00200,100.00, crepository.findOne(3L)));
 				irepository.save(new Item("Washing machine","Brand:Samsung still in box","Refurbished",00500,500.00, crepository.findOne(1L)));				
-				
+				irepository.save(new Item("broken honda 1999","manual transmition 2131230km","Used",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
+				irepository.save(new Item("new honda 2009","manual transmition 0km","NEW",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
 				
 				//show all users
 				log.info("SHOWING ALL USERS");
@@ -75,8 +78,7 @@ public class ESellBackEndApplication {
 				for (User user : urepository.findByLastName("Zapata")) {
 					log.info(user.toString());
 				}
-		//irepository.save(new Item("broken honda 1999","manual transmition 2131230km","Used",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
-				//irepository.save(new Item("new honda 2009","manual transmition 0km","NEW",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
+		//
 			
 				log.info("-------------------------------");
 				log.info("-----------Show items users-------------------");
@@ -86,6 +88,7 @@ public class ESellBackEndApplication {
 				//crepository.save(new Category("Test"));
 				//crepository.delete(6L);
 				
+
 				};
 	
 		}
