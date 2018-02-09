@@ -4,7 +4,7 @@ package e_sell.e_sell_back_end.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -116,8 +116,7 @@ public class AppController {
 	
 	//1.create empty Item object and add to model
     
-    @Autowired
-    private HttpSession session;
+
     
 	@GetMapping("/add_item")
 	public String itemForm(Model model){

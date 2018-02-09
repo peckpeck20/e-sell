@@ -2,25 +2,24 @@ package e_sell.e_sell_back_end;
 
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import e_sell.e_sell_back_end.domain.Category;
+//import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
-import e_sell.e_sell_back_end.domain.Item;
+//import e_sell.e_sell_back_end.domain.Item;
 import e_sell.e_sell_back_end.domain.ItemRepository;
-import e_sell.e_sell_back_end.domain.User;
+//import e_sell.e_sell_back_end.domain.User;
 import e_sell.e_sell_back_end.domain.UserRepository;
 
 
 @SpringBootApplication
 public class ESellBackEndApplication {
 	//Logger
-	private static final Logger log = LoggerFactory.getLogger(ESellBackEndApplication.class);
+	//private static final Logger log = LoggerFactory.getLogger(ESellBackEndApplication.class);
 	//main application
 	public static void main(String[] args) {
 		SpringApplication.run(ESellBackEndApplication.class, args);
