@@ -19,6 +19,14 @@
 
 ### Demo
 
+https://e-sell-spring-mvc.herokuapp.com/
+
+test user:
+
+username - admin
+
+password - 
+
 -One click Facebook login
 
 ![alt text](https://media.giphy.com/media/xUOwGayKSaZSVWbhaE/giphy.gif)
