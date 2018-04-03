@@ -10,6 +10,7 @@
 			<div th:replace="template :: navBar"></div>
 			<h1 sec:authorize="hasRole('USER')">Shop by Categories</h1>
 			<h1 sec:authorize="hasRole('ADMIN')">Manage Categories</h1>
+			<!-- 
 			<table  class="table table-striped ">
 				<tr th:each ="category : ${categorys}">
 					<td><a class="btn btn-info btn-lg btn-block" th:href="@{/item-by-category/{id}(id=${category.id})}" th:text="${category.type}" >click me!</a></td>
@@ -17,11 +18,12 @@
 					<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"  th:href="@{/delete_category/{id}(id=${category.id})}">delete</a></td>
 				</tr>
 			</table>
+			 -->
 			<!-- Add category -->	
-			<form sec:authorize="hasRole('ADMIN')" method="POST" th:action="@{add-category}" th:object="${category}">
+			<form sec:authorize="hasRole('ADMIN')" method="POST" action="#"  th:action="@{add-category}" th:object="${category}">
 				<div class="form-group">
 		    	<label for="addCategory">Add Category:</label>
-		    	<input type="text" class="form-control" id="addCategory" autofocus="autofocus" placeholder="Enter new Category" th:field="*{type}"></input>
+		    	<input type="text" class="form-control" id="addCategory" autofocus="autofocus" placeholder="Enter new Category" th:field="*{type}" ></input>
 		    	</div>
 		    	<input type="submit" value="Submit" class="btn btn-primary" />
 		    	<input type="reset" value="Reset" class="btn btn-basic" />

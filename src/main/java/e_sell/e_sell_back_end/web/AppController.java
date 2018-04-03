@@ -154,11 +154,28 @@ public class AppController {
     }
     
 	//show all categories
-	@RequestMapping(value="/categorylist")
+    @GetMapping(value="/categorylist")
 	public String categoryList(Model model){
+    	model.addAttribute("category", new Category());
 		model.addAttribute("categorys", crepository.findAll());
 		return "categorylist";
 	}
+	
+    //create new category
+    @RequestMapping(value = "/add-category", method = RequestMethod.GET)
+    public String createCat(Category category,Model model){
+        model.addAttribute("category", new Category());
+    	return "/add-category";
+    }
+    
+    
+    //save category
+    @RequestMapping(value = "/add-category", method = RequestMethod.POST)
+    public String saveCat(Category category){
+        crepository.save(category);
+    	return "redirect:/categorylist";
+    }
+    
     //show items by category
     @RequestMapping(value="/item-by-category/{id}",method= RequestMethod.GET)
     public String itemByCategory(@PathVariable("id") Category categoryid, Model model){
@@ -172,6 +189,11 @@ public class AppController {
     	return "/itemlist";  	
     }
     
+
+    
+
+    
+    
     //edit category
     @RequestMapping(value="/edit_category/{id}",method = RequestMethod.GET)
     //@PathVariable indicates that a method parameter should be bound to a URL template variable
@@ -179,19 +201,8 @@ public class AppController {
 		model.addAttribute(crepository.findOne(categoryId));	
     	return "edit-category";	
     }
-    //save category
-    @RequestMapping(value = "/save_category", method = RequestMethod.POST)
-    public String saveCat(Category category){
-        crepository.save(category);
-    	return "redirect:/categorylist";
-    }
-    
-    //create new category
-    @RequestMapping(value = "/save_category", method = RequestMethod.GET)
-    public String createCat(Category category,Model model){
-        model.addAttribute("category", new Category());
-    	return "/save_category";
-    }
+
+
     
     
     //delete category
