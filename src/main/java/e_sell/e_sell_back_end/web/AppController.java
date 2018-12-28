@@ -180,13 +180,13 @@ public class AppController {
     @RequestMapping(value="/item-by-category/{id}",method= RequestMethod.GET)
     public String itemByCategory(@PathVariable("id") Category categoryid, Model model){
     	model.addAttribute("items",irepository.findByCategory(categoryid));
-    	return "/itemlist";  	
+    	return "redirect:/itemlist";  	
     }
   //show items by user
     @RequestMapping(value="/user-posts/{id}",method= RequestMethod.GET)
     public String showPosts(@PathVariable("id") User userId, Model model){
     	model.addAttribute("items",irepository.findByUser(userId));
-    	return "/itemlist";  	
+    	return "redirect:/itemlist";  	
     }
     
 
