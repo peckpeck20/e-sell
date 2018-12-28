@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import e_sell.e_sell_back_end.domain.Category;
 import e_sell.e_sell_back_end.domain.CategoryRepository;
@@ -29,12 +30,16 @@ public class ESellBackEndApplication {
 		public CommandLineRunner demo(UserRepository urepository, CategoryRepository crepository, ItemRepository irepository) {
 			return (args) -> {
 				
+				//create test users
+				String pwd = "1234567";
+				BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+				String hashPwd = bc.encode(pwd);
 				
-				//create users
-				
-				urepository.save(new User("Jose","Zapata","jose@zapata.com","peckT","1234567","ADMIN"));
-				urepository.save(new User("Teddy","Bear","teddy@bear.com","tedy200","12345678","USER"));
-				urepository.save(new User("Cleo","Yuka","cleo@yuka.com","yuka2017","12345678","USER"));
+				urepository.save(new User("Jose", "Zapata", "jose@zapata.com", "creator", hashPwd,"ADMIN"));
+				urepository.save(new User("Tester","Bear","tester@bear.com","tester",hashPwd,"USER"));
+				urepository.save(new User("Beta","Beta","beta@tester.com","betatester",hashPwd,"USER"));
+				urepository.save(new User("Charley","Charley","charley@tester.com","charleytester",hashPwd,"USER"));
+				urepository.save(new User("Delta","Delta","delta@tester.com","deltatester",hashPwd,"USER"));
 				
 				//create categories
 				crepository.save(new Category("Home"));
@@ -43,51 +48,20 @@ public class ESellBackEndApplication {
 				crepository.save(new Category("Vehicles"));
 				crepository.save(new Category("Clothes"));
 				
-				
 				//insert items
-				irepository.save(new Item("mazda 2009","manual transmition 10000km","Used",00200,2000.00, crepository.findOne(4L)));
-				irepository.save(new Item("iPhone 6","latest OS, includes all accesories","Used",00150,999.00,crepository.findOne(2L)));
-				irepository.save(new Item("Blender","brand new, never opened","New",00135,20.00,crepository.findOne(1L)));
-				irepository.save(new Item("Samsung 8","Fresh from the factory, 3 year warranty","Refurbished",00200,400.00,crepository.findOne(2L)));
-				irepository.save(new Item("T-shirt","White Polo","New",00124,4.99,crepository.findOne(5L)));
-				irepository.save(new Item("Timberland Boots","Size 9","New",00200,100.00,crepository.findOne(5L)));
-				irepository.save(new Item("Lenovo x240","Latest ultrabook - i7 quad core processor","Refurbished",00100,499.99,crepository.findOne(2L)));
-				irepository.save(new Item("Car wash","make your car fresh and clean now!","New",00200,40.00, crepository.findOne(3L)));
-				irepository.save(new Item("Computer repair","Do you have a broken computer? no problem. Call us now ","New",00200,100.00, crepository.findOne(3L)));
-				irepository.save(new Item("Washing machine","Brand:Samsung still in box","Refurbished",00500,500.00, crepository.findOne(1L)));				
+				irepository.save(new Item("mazda 2009","manual transmition 10000km","Used",00200,2000.00, crepository.findOne(4L),urepository.findOne(2L)));
+				irepository.save(new Item("iPhone 6","latest OS, includes all accesories","Used",00150,999.00,crepository.findOne(2L),urepository.findOne(5L)));
+				irepository.save(new Item("Blender","brand new, never opened","New",00135,20.00,crepository.findOne(1L),urepository.findOne(2L)));
+				irepository.save(new Item("Samsung 8","Fresh from the factory, 3 year warranty","Refurbished",00200,400.00,crepository.findOne(2L),urepository.findOne(4L)));
+				irepository.save(new Item("T-shirt","White Polo","New",00124,4.99,crepository.findOne(5L),urepository.findOne(2L)));
+				irepository.save(new Item("Timberland Boots","Size 9","New",00200,100.00,crepository.findOne(5L),urepository.findOne(2L)));
+				irepository.save(new Item("Lenovo x240","Latest ultrabook - i7 quad core processor","Refurbished",00100,499.99,crepository.findOne(2L),urepository.findOne(3L)));
+				irepository.save(new Item("Car wash","make your car fresh and clean now!","New",00200,40.00, crepository.findOne(3L),urepository.findOne(3L)));
+				irepository.save(new Item("Computer repair","Do you have a broken computer? no problem. Call us now ","New",00200,100.00, crepository.findOne(3L),urepository.findOne(2L)));
+				irepository.save(new Item("Washing machine","Brand:Samsung still in box","Refurbished",00500,500.00, crepository.findOne(1L),urepository.findOne(2L)));				
 				irepository.save(new Item("broken honda 1999","manual transmition 2131230km","Used",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
 				irepository.save(new Item("new honda 2009","manual transmition 0km","NEW",00200,2000.00, crepository.findOne(4L),urepository.findOne(1L)));
-				/*
-				//show all users
-				log.info("SHOWING ALL USERS");
-				log.info("-------------------------------");
-				for (User user : urepository.findAll()) {
-					log.info(user.toString());
-				}
-				//get a user by ID
-				log.info("USER WITH ID 3");		
-				//once we found the user we see the results in String format
-				User foundUser = urepository.findOne(3L);
-				log.info("-------------------------------");
-				log.info(foundUser.toString());
-				//get user by lastName
-				log.info("SHOW USER WITH LAST NAME: ZAPATA");
-				log.info("-------------------------------");
-				//User userlastName = urepository.findByLastName("zapata")
-				for (User user : urepository.findByLastName("Zapata")) {
-					log.info(user.toString());
-				}
-		//
-			
-				log.info("-------------------------------");
-				log.info("-----------Show items users-------------------");
-				Item item = irepository.findByUser(1L);
-				log.info(item.toString());
-				*/
-				//crepository.save(new Category("Test"));
-				//crepository.delete(6L);
-				
-
+		
 				};
 	
 		}
