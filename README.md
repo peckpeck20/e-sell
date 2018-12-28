@@ -1,38 +1,65 @@
-# e-sell
-## A full-stack web based advertisement system
+# E-Sell :mortar_board:
 
-### Features
+## Full-stack web based advertisement system
 
-- visitor can view all ads and filter by categories
-- one click Facebook login and account create
-- registed user can create and manage ads 
-- admin panel - full rights
-- API & CRUD methods
+### Features :white_check_mark:
+- visitor can view ad listings & filter by category
+- user registration
+- one click Facebook register & login 
+- registed user can create, edit, update & delete ads 
+- REST API & CRUD methods
 
-### Technologies used
+### Administration :ballot_box_with_check:
+- custom admin panel
+- complete read & write access to all parts of the system such managing users, categories & items.
+
+### User journey
+
+![alt text](https://media.giphy.com/media/3o7WIoVDWmVtDsQYJG/giphy.gif)
+
+### One click Facebook login
+
+![alt text](https://media.giphy.com/media/xUOwGayKSaZSVWbhaE/giphy.gif)
+
+### Admin view
+
+![alt text](https://media.giphy.com/media/3ohs4tPtVutjcdN5EQ/giphy.gif)
+
+### Tech stack :computer:
+
+#### database 
+- SQL
+- Maria DB instance running at Haaga-Helia's server
+- H2 in-memory database (for testing purposes)
+
+#### back-end
+- Java
 - Springboot MVC
+
+#### front-end
 - Thymeleaf
-- Maria DB running on a live server
-- H2 Database (for testing purposes)
 - Bootstrap 4
 
-
-### Demo
+### Live demo
 
 https://e-sell-spring-mvc.herokuapp.com/
 
-test users:
+#### demo credentials
 
-username - admin
+- regular user 
+```
+username : tester
+password : 1234567
+```
 
-password - 
+- admin  
+```
+username : admin
+password : leave blank ;)
+```
 
-username - tester
 
-password - 1234567
-
-
-### API
+### API end-points
 
 https://e-sell-spring-mvc.herokuapp.com/api/
 
@@ -41,14 +68,12 @@ https://e-sell-spring-mvc.herokuapp.com/api/items
 https://e-sell-spring-mvc.herokuapp.com/api/categories
 
 
--One click Facebook login
+### Future improvements :memo:
 
-![alt text](https://media.giphy.com/media/xUOwGayKSaZSVWbhaE/giphy.gif)
+- [ ] Migrate front-end to React.JS
+- [ ] Payment service
+- [ ] Predictive search bar
+- [ ] Image support to listings
+- [ ] Messagging service between users
+- [ ] Google signin
 
--User journey
-
-![alt text](https://media.giphy.com/media/3o7WIoVDWmVtDsQYJG/giphy.gif)
-
--Admin view
-
-![alt text](https://media.giphy.com/media/3ohs4tPtVutjcdN5EQ/giphy.gif)
