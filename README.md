@@ -21,11 +21,25 @@
 
 https://e-sell-spring-mvc.herokuapp.com/
 
-test user:
+test users:
 
 username - admin
 
 password - 
+
+username - tester
+
+password - 1234567
+
+
+### API
+
+https://e-sell-spring-mvc.herokuapp.com/api/
+
+https://e-sell-spring-mvc.herokuapp.com/api/items
+
+https://e-sell-spring-mvc.herokuapp.com/api/categories
+
 
 -One click Facebook login
 
