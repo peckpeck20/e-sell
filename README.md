@@ -13,6 +13,15 @@
 - custom admin panel
 - complete read & write access to all parts of the system such managing users, categories & items.
 
+### Future improvements :memo:
+
+- [ ] Migrate front-end to React.JS
+- [ ] Payment service
+- [ ] Predictive search bar
+- [ ] Image support to listings
+- [ ] Messagging service between users
+- [ ] Google signin
+
 ### User journey
 
 ![alt text](https://media.giphy.com/media/3o7WIoVDWmVtDsQYJG/giphy.gif)
@@ -68,12 +77,5 @@ https://e-sell-spring-mvc.herokuapp.com/api/items
 https://e-sell-spring-mvc.herokuapp.com/api/categories
 
 
-### Future improvements :memo:
 
-- [ ] Migrate front-end to React.JS
-- [ ] Payment service
-- [ ] Predictive search bar
-- [ ] Image support to listings
-- [ ] Messagging service between users
-- [ ] Google signin
 
